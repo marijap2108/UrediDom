@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UrediDom.Models;
 
 namespace UrediDom.Entities
 {
@@ -11,7 +12,7 @@ namespace UrediDom.Entities
             this.configuration = configuration;
         }
 
-        public DbSet<ProductOrder> ProductOrder { get; set; }
+        public DbSet<ProductOrderDto> productOrder { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

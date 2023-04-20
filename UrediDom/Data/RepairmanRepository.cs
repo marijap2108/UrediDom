@@ -12,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<Repairman> GetRepairman()
+        public List<RepairmanDto> GetRepairman()
         {
-            Console.WriteLine(context.Repairman.ToList());
-            return context.Repairman.ToList();
+            Console.WriteLine(context.repairman.ToList());
+            return context.repairman.ToList();
         }
 
-        public Repairman CreateRepairman(Repairman repairman)
+        public RepairmanDto CreateRepairman(RepairmanDto repairman)
         {
             var createdEntity = context.Add(repairman);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public Repairman? GetRepairmanById(long repairmanID)
+        public RepairmanDto? GetRepairmanById(long repairmanID)
         {
-            return context.Repairman.FirstOrDefault(e => e.RepairmanID == repairmanID);
+            return context.repairman.FirstOrDefault(e => e.repairmanID == repairmanID);
         }
 
         public void DeleteRepairman(long repairmanID)

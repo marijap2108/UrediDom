@@ -1,15 +1,17 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IAvailabilityRepository
     {
-        List<Availability> GetAvailability();
+        List<AvailabilityDto> GetAvailability();
 
-        Availability CreateAvailability(Availability availability);
+        AvailabilityDto CreateAvailability(AvailabilityDto availability);
 
-        Availability? GetAvailabilityById(long repairmanID);
+        AvailabilityDto? GetAvailabilityById(long repairmanID);
 
         void DeleteAvailability(long repairmanID);
 
-        Availability UpdateAvailability(Availability availability, Availability newAvailability);
+        AvailabilityDto UpdateAvailability(AvailabilityDto availability, AvailabilityDto newAvailability);
     }
 }

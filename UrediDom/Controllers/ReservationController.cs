@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using UrediDom.Data;
@@ -22,13 +23,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new reservation</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [AllowAnonymous]
         [HttpPost]
         [Route("/reservation")]
-        public virtual IActionResult Addreservation([FromBody] Reservation body)
+        public virtual IActionResult Addreservation([FromBody] ReservationDto body)
         {
             try
             {
-                Reservation reservation = reservationRepository.CreateReservation(body);
+                ReservationDto reservation = reservationRepository.CreateReservation(body);
                 return Ok(reservation);
             }
             catch (Exception ex)
@@ -44,6 +46,7 @@ namespace UrediDom.Controllers
         /// <param name="reservationId">reservation id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/reservation/{reservationId}")]
         public virtual IActionResult Deletereservation([FromRoute][Required] long reservationId, [FromHeader] string apiKey)
@@ -74,6 +77,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/reservation/{reservationId}")]
         public virtual IActionResult Getreservation([FromRoute][Required] long reservationId)
@@ -94,6 +98,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/reservation")]
         public virtual IActionResult Reservation()
@@ -116,11 +121,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("/reservation")]
-        public virtual IActionResult Updatereservation([FromBody] Reservation body)
+        public virtual IActionResult Updatereservation([FromBody] ReservationDto body)
         {
-            var reservation = reservationRepository.GetReservationById(body.ReservationID);
+            var reservation = reservationRepository.GetReservationById(body.reservationID);
 
             if (reservation == null)
             {

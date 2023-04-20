@@ -1,12 +1,14 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IAdminRepository
     {
-        List<Admin> GetAdmin();
+        List<AdminDto> GetAdmin();
 
-        Admin CreateAdmin(Admin admin);
+        AdminDto CreateAdmin(AdminDto admin);
 
-        Admin? GetAdminById(long adminID);
+        AdminDto? GetAdminById(long adminID);
 
         void DeleteAdmin(long adminID);
     }

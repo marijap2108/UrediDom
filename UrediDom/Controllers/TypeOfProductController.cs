@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -22,13 +24,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new typeOfProduct</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("/typeOfProduct")]
-        public virtual IActionResult AddtypeOfProduct([FromBody] TypeOfProduct body)
+        public virtual IActionResult AddtypeOfProduct([FromBody] TypeOfProductDto body)
         {
             try
             {
-                TypeOfProduct typeOfProduct = typeOfProductRepository.CreateTypeOfProduct(body);
+                TypeOfProductDto typeOfProduct = typeOfProductRepository.CreateTypeOfProduct(body);
                 return Ok(typeOfProduct);
             }
             catch (Exception ex)
@@ -44,9 +47,10 @@ namespace UrediDom.Controllers
         /// <param name="typeOfProductId">typeOfProduct id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/typeOfProduct/{typeOfProductId}")]
-        public virtual IActionResult DeletetypeOfProduct([FromRoute][Required] long? typeOfProductId, [FromHeader] string apiKey)
+        public virtual IActionResult DeletetypeOfProduct([FromRoute][Required] long typeOfProductId, [FromHeader] string apiKey)
         {
             try
             {
@@ -74,9 +78,10 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [AllowAnonymous]
         [HttpGet]
         [Route("/typeOfProduct/{typeOfProductId}")]
-        public virtual IActionResult GettypeOfProduct([FromRoute][Required] long? typeOfProductId)
+        public virtual IActionResult GettypeOfProduct([FromRoute][Required] long typeOfProductId)
         {
             var typeOfProduct = typeOfProductRepository.GetTypeOfProductById(typeOfProductId);
 
@@ -94,6 +99,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [AllowAnonymous]
         [HttpGet]
         [Route("/typeOfProduct")]
         public virtual IActionResult TypeOfProduct()
@@ -116,11 +122,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("/typeOfProduct")]
-        public virtual IActionResult UpdateTypeOfProduct([FromBody] TypeOfProduct body)
+        public virtual IActionResult UpdateTypeOfProduct([FromBody] TypeOfProductDto body)
         {
-            var typeOfProduct = typeOfProductRepository.GetTypeOfProductById(body.TypeOfProductID);
+            var typeOfProduct = typeOfProductRepository.GetTypeOfProductById(body.typeID);
 
             if (typeOfProduct == null)
             {

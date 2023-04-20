@@ -12,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<Reservation> GetReservation()
+        public List<ReservationDto> GetReservation()
         {
-            Console.WriteLine(context.Reservation.ToList());
-            return context.Reservation.ToList();
+            Console.WriteLine(context.reservation.ToList());
+            return context.reservation.ToList();
         }
 
-        public Reservation CreateReservation(Reservation reservation)
+        public ReservationDto CreateReservation(ReservationDto reservation)
         {
             var createdEntity = context.Add(reservation);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public Reservation? GetReservationById(long reservationID)
+        public ReservationDto? GetReservationById(long reservationID)
         {
-            return context.Reservation.FirstOrDefault(e => e.ReservationID == reservationID);
+            return context.reservation.FirstOrDefault(e => e.reservationID == reservationID);
         }
 
         public void DeleteReservation(long reservationID)
@@ -41,11 +41,11 @@ namespace UrediDom.Data
             }
         }
 
-        public Reservation UpdateReservation(Reservation reservation, Reservation newReservation)
+        public ReservationDto UpdateReservation(ReservationDto reservation, ReservationDto newReservation)
         {
-            reservation.StartDate = newReservation.StartDate;
-            reservation.EndDate = newReservation.EndDate;
-            reservation.RepairmanID = newReservation.RepairmanID;
+            reservation.startDate = newReservation.startDate;
+            reservation.endDate = newReservation.endDate;
+            reservation.repairmanID = newReservation.repairmanID;
             context.SaveChanges();
             return reservation;
         }

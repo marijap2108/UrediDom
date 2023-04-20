@@ -12,7 +12,7 @@ namespace UrediDom.Entities
             this.configuration = configuration;
         }
 
-        public DbSet<Repairman> Repairman { get; set; }
+        public DbSet<RepairmanDto> repairman { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

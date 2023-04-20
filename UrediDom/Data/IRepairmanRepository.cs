@@ -4,11 +4,11 @@ namespace UrediDom.Data
 {
     public interface IRepairmanRepository
     {
-        List<Repairman> GetRepairman();
+        List<RepairmanDto> GetRepairman();
 
-        Repairman CreateRepairman(Repairman repairman);
+        RepairmanDto CreateRepairman(RepairmanDto repairman);
 
-        Repairman? GetRepairmanById(long repairmanID);
+        RepairmanDto? GetRepairmanById(long repairmanID);
 
         void DeleteRepairman(long repairmanID);
     }

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -22,13 +24,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new productOrder</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("/productOrder")]
-        public virtual IActionResult AddproductOrder([FromBody] ProductOrder body)
+        public virtual IActionResult AddproductOrder([FromBody] ProductOrderDto body)
         {
             try
             {
-                ProductOrder productOrder = productOrderRepository.CreateProductOrder(body);
+                ProductOrderDto productOrder = productOrderRepository.CreateProductOrder(body);
                 return Ok(productOrder);
             }
             catch (Exception ex)
@@ -45,7 +48,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/productOrder/{productId}")]
         public virtual IActionResult GetByProductID([FromRoute][Required] long productId)
@@ -66,6 +69,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/productOrder")]
         public virtual IActionResult ProductOrder()

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -22,13 +24,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new categoryProduct</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("/categoryProduct")]
-        public virtual IActionResult AddcategoryProduct([FromBody] CategoryProduct body)
+        public virtual IActionResult AddcategoryProduct([FromBody] CategoryProductDto body)
         {
             try
             {
-                CategoryProduct categoryProduct = categoryProductRepository.CreateCategoryProduct(body);
+                CategoryProductDto categoryProduct = categoryProductRepository.CreateCategoryProduct(body);
                 return Ok(categoryProduct);
             }
             catch (Exception ex)
@@ -44,6 +47,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [AllowAnonymous]
         [HttpGet]
         [Route("/categoryProduct")]
         public virtual IActionResult CategoryProduct()
@@ -65,6 +69,7 @@ namespace UrediDom.Controllers
         /// <param name="categoryProductId">categoryProduct id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/categoryProduct/{productId}")]
         public virtual IActionResult DeleteProductId([FromRoute][Required] long productId, [FromHeader] string apiKey)
@@ -87,6 +92,7 @@ namespace UrediDom.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/categoryProduct/{categoryId}")]
         public virtual IActionResult DeleteCategoryId([FromRoute][Required] long categoryId, [FromHeader] string apiKey)
@@ -109,8 +115,9 @@ namespace UrediDom.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
-        [Route("/categoryProduct/{productId}{categoryId}")]
+        [Route("/categoryProduct/{productId}/{categoryId}")]
         public virtual IActionResult DeletecategoryProduct([FromRoute][Required] long productId, [FromRoute][Required] long categoryId, [FromHeader] string apiKey)
         {
             try
@@ -139,6 +146,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [AllowAnonymous]
         [HttpGet]
         [Route("/categoryProduct/{categoryId}")]
         public virtual IActionResult GetByCategoryID([FromRoute][Required] long categoryId)
@@ -152,6 +160,7 @@ namespace UrediDom.Controllers
             return Ok(categoryProduct);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("/categoryProduct/{productId}")]
         public virtual IActionResult GetByProductID([FromRoute][Required] long productId)
@@ -165,8 +174,9 @@ namespace UrediDom.Controllers
             return Ok(categoryProduct);
         }
 
+        [AllowAnonymous]
         [HttpGet]
-        [Route("/categoryProduct/{productId}{categoryId}")]
+        [Route("/categoryProduct/{productId}/{categoryId}")]
         public virtual IActionResult GetcategoryProduct([FromRoute][Required] long productId, [FromRoute][Required] long categoryId)
         {
             var categoryProduct = categoryProductRepository.GetCategoryProductByIds(productId, categoryId);

@@ -1,4 +1,5 @@
 ﻿using UrediDom.Entities;
+using UrediDom.Models;
 
 namespace UrediDom.Data
 {
@@ -11,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<Admin> GetAdmin()
+        public List<AdminDto> GetAdmin()
         {
-            Console.WriteLine(context.Admin.ToList());
-            return context.Admin.ToList();
+            Console.WriteLine(context.admin.ToList());
+            return context.admin.ToList();
         }
 
-        public Admin CreateAdmin(Admin admin)
+        public AdminDto CreateAdmin(AdminDto admin)
         {
             var createdEntity = context.Add(admin);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public Admin? GetAdminById(long adminID)
+        public AdminDto? GetAdminById(long adminID)
         {
-            return context.Admin.FirstOrDefault(e => e.AdminID == adminID);
+            return context.admin.FirstOrDefault(e => e.adminID == adminID);
         }
 
         public void DeleteAdmin(long adminID)

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using UrediDom.Data;
+using UrediDom.Models;
 
 namespace UrediDom.Controllers
 {
@@ -21,13 +23,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new admin</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("/admin")]
-        public virtual IActionResult Addadmin([FromBody] Admin body)
+        public virtual IActionResult Addadmin([FromBody] AdminDto body)
         {
             try
             {
-                Admin admin = adminRepository.CreateAdmin(body);
+                AdminDto admin = adminRepository.CreateAdmin(body);
                 return Ok(admin);
             }
             catch (Exception ex)
@@ -43,6 +46,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/admin")]
         public virtual IActionResult Admin()
@@ -64,6 +68,7 @@ namespace UrediDom.Controllers
         /// <param name="adminId">admin id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/admin/{adminId}")]
         public virtual IActionResult Deleteadmin([FromRoute][Required] long adminId, [FromHeader] string apiKey)
@@ -94,6 +99,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/admin/{adminId}")]
         public virtual IActionResult Getadmin([FromRoute][Required] long adminId)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UrediDom.Models;
 
 namespace UrediDom.Entities
 {
@@ -6,12 +7,12 @@ namespace UrediDom.Entities
     {
         private readonly IConfiguration configuration;
 
-        public ProductCategoryContext(ProductCategoryContext<AdminContext> options, IConfiguration configuration) : base(options)
+        public ProductCategoryContext(DbContextOptions<ProductCategoryContext> options, IConfiguration configuration) : base(options)
         {
             this.configuration = configuration;
         }
 
-        public DbSet<ProductCategory> ProductCategory { get; set; }
+        public DbSet<ProductCategoryDto> productCategory { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

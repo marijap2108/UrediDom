@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -22,13 +24,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new availability</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Repairman")]
         [HttpPost]
         [Route("/availability")]
-        public virtual IActionResult Addavailability([FromBody] Availability body)
+        public virtual IActionResult Addavailability([FromBody] AvailabilityDto body)
         {
             try
             {
-                Availability availability = availabilityRepository.CreateAvailability(body);
+                AvailabilityDto availability = availabilityRepository.CreateAvailability(body);
                 return Ok(availability);
             }
             catch (Exception ex)
@@ -44,6 +47,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin, Repairman")]
         [HttpGet]
         [Route("/availability")]
         public virtual IActionResult Availability()
@@ -65,6 +69,7 @@ namespace UrediDom.Controllers
         /// <param name="availabilityId">availability id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin, Repairman")]
         [HttpDelete]
         [Route("/availability/{availabilityId}")]
         public virtual IActionResult Deleteavailability([FromRoute][Required] long availabilityId, [FromHeader] string apiKey)
@@ -95,6 +100,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin, Repairman")]
         [HttpGet]
         [Route("/availability/{availabilityId}")]
         public virtual IActionResult Getavailability([FromRoute][Required] long availabilityId)
@@ -116,11 +122,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Repairman")]
         [HttpPut]
         [Route("/availability")]
-        public virtual IActionResult Updateavailability([FromBody] Availability body)
+        public virtual IActionResult Updateavailability([FromBody] AvailabilityDto body)
         {
-            var availability = availabilityRepository.GetAvailabilityById(body.RepairmanID);
+            var availability = availabilityRepository.GetAvailabilityById(body.repairmanID);
 
             if (availability == null)
             {

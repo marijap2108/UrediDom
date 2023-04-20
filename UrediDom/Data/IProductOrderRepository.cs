@@ -1,19 +1,21 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IProductOrderRepository
     {
-        List<ProductOrder> GetProductOrder();
+        List<ProductOrderDto> GetProductOrder();
 
-        ProductOrder CreateProductOrder(ProductOrder productOrder);
+        ProductOrderDto CreateProductOrder(ProductOrderDto productOrder);
 
-        ProductOrder? GetByOrderId(long productOrderID);
+        ProductOrderDto? GetByOrderId(long productOrderID);
 
-        ProductOrder? GetByProductId(long productOrderID);
+        ProductOrderDto? GetByProductId(long productOrderID);
 
         void DeleteByOrderId(long OrderID);
 
         void DeleteByProductId(long ProductID);
 
-        ProductOrder UpdateProductOrder(ProductOrder order, ProductOrder newOrder);
+        ProductOrderDto UpdateProductOrder(ProductOrderDto order, ProductOrderDto newOrder);
     }
 }

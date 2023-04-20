@@ -12,32 +12,32 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<CategoryProduct> GetCategoryProduct()
+        public List<CategoryProductDto> GetCategoryProduct()
         {
-            Console.WriteLine(context.CategoryProduct.ToList());
-            return context.CategoryProduct.ToList();
+            Console.WriteLine(context.categoryProduct.ToList());
+            return context.categoryProduct.ToList();
         }
 
-        public CategoryProduct CreateCategoryProduct(CategoryProduct categoryProduct)
+        public CategoryProductDto CreateCategoryProduct(CategoryProductDto categoryProduct)
         {
             var createdEntity = context.Add(categoryProduct);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public List<CategoryProduct> GetByCategoryId(long categoryId)
+        public List<CategoryProductDto> GetByCategoryId(long categoryId)
         {
-            return context.CategoryProduct.Where(e => e.CategoryID == categoryId).ToList();
+            return context.categoryProduct.Where(e => e.categoryID == categoryId).ToList();
         }
 
-        public List<CategoryProduct> GetByProductId(long productId)
+        public List<CategoryProductDto> GetByProductId(long productId)
         {
-            return context.CategoryProduct.Where(e => e.ProductID == productId).ToList();
+            return context.categoryProduct.Where(e => e.productID == productId).ToList();
         }
 
-        public CategoryProduct? GetCategoryProductByIds(long productId, long categoryId)
+        public CategoryProductDto? GetCategoryProductByIds(long productId, long categoryId)
         {
-            return context.CategoryProduct.FirstOrDefault(e => e.ProductID == productId && e.CategoryID == categoryId);
+            return context.categoryProduct.FirstOrDefault(e => e.productID == productId && e.categoryID == categoryId);
         }
 
         public void DeleteByCategoryId(long categoryId)

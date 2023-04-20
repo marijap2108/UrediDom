@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -22,13 +24,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new reapirman</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("/reapirman")]
-        public virtual IActionResult Addreapirman([FromBody] Repairman body)
+        public virtual IActionResult Addreapirman([FromBody] RepairmanDto body)
         {
             try
             {
-                Reapirman reapirman = reapirmanRepository.CreateRepairman(body);
+                RepairmanDto reapirman = reapirmanRepository.CreateRepairman(body);
                 return Ok(reapirman);
             }
             catch (Exception ex)
@@ -44,6 +47,7 @@ namespace UrediDom.Controllers
         /// <param name="reapirmanId">reapirman id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/reapirman/{reapirmanId}")]
         public virtual IActionResult Deletereapirman([FromRoute][Required] long reapirmanId, [FromHeader] string apiKey)
@@ -74,6 +78,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/reapirman/{reapirmanId}")]
         public virtual IActionResult Getreapirman([FromRoute][Required] long reapirmanId)
@@ -94,6 +99,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/reapirman")]
         public virtual IActionResult Reapirman()

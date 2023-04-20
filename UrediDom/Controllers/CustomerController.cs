@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using UrediDom.Data;
@@ -22,13 +23,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new customer</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [AllowAnonymous]
         [HttpPost]
         [Route("/customer")]
-        public virtual IActionResult Addcustomer([FromBody] Customer body)
+        public virtual IActionResult Addcustomer([FromBody] CustomerDto body)
         {
             try
             {
-                Customer customer = customerRepository.CreateCustomer(body);
+                CustomerDto customer = customerRepository.CreateCustomer(body);
                 return Ok(customer);
             }
             catch (Exception ex)
@@ -44,6 +46,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/customer")]
         public virtual IActionResult Customer()
@@ -65,6 +68,7 @@ namespace UrediDom.Controllers
         /// <param name="customerId">customer id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/customer/{customerId}")]
         public virtual IActionResult Deletecustomer([FromRoute][Required] long customerId, [FromHeader] string apiKey)
@@ -95,6 +99,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/customer/{customerId}")]
         public virtual IActionResult Getcustomer([FromRoute][Required] long customerId)
@@ -116,11 +121,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin, Customer")]
         [HttpPut]
         [Route("/customer")]
-        public virtual IActionResult Updatecustomer([FromBody] Customer body)
+        public virtual IActionResult Updatecustomer([FromBody] CustomerDto body)
         {
-            var customer = customerRepository.GetCustomerById(body.CustomerID);
+            var customer = customerRepository.GetCustomerById(body.customerID);
 
             if (customer == null)
             {

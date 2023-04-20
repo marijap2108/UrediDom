@@ -1,4 +1,5 @@
 ﻿using UrediDom.Entities;
+using UrediDom.Models;
 
 namespace UrediDom.Data
 {
@@ -11,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<Order> GetOrder()
+        public List<OrderDto> GetOrder()
         {
-            Console.WriteLine(context.Order.ToList());
-            return context.Order.ToList();
+            Console.WriteLine(context.order.ToList());
+            return context.order.ToList();
         }
 
-        public Order CreateOrder(Order order)
+        public OrderDto CreateOrder(OrderDto order)
         {
             var createdEntity = context.Add(order);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public Order? GetOrderById(long orderID)
+        public OrderDto? GetOrderById(long orderID)
         {
-            return context.Order.FirstOrDefault(e => e.OrderID == orderID);
+            return context.order.FirstOrDefault(e => e.orderID == orderID);
         }
 
         public void DeleteOrder(long orderID)
@@ -40,12 +41,12 @@ namespace UrediDom.Data
             }
         }
 
-        public Order UpdateOrder(Order order, Order newOrder)
+        public OrderDto UpdateOrder(OrderDto order, OrderDto newOrder)
         {
-            order.DateOfOrder = newOrder.DateOfOrder;
-            order.Amount = newOrder.Amount;
-            order.CustomerID = newOrder.CustomerID;
-            order.RepairmanID = newOrder.RepairmanID;
+            order.dateOfOrder = newOrder.dateOfOrder;
+            order.amount = newOrder.amount;
+            order.customerID = newOrder.customerID;
+            order.repairmanID = newOrder.repairmanID;
             context.SaveChanges();
             return order;
         }

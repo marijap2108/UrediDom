@@ -1,4 +1,5 @@
 ﻿using UrediDom.Entities;
+using UrediDom.Models;
 
 namespace UrediDom.Data
 {
@@ -11,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<Customer> GetCustomer()
+        public List<CustomerDto> GetCustomer()
         {
-            Console.WriteLine(context.Customer.ToList());
-            return context.Customer.ToList();
+            Console.WriteLine(context.customer.ToList());
+            return context.customer.ToList();
         }
 
-        public Customer CreateCustomer(Customer customer)
+        public CustomerDto CreateCustomer(CustomerDto customer)
         {
             var createdEntity = context.Add(customer);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public Customer? GetCustomerById(long customerID)
+        public CustomerDto? GetCustomerById(long customerID)
         {
-            return context.Customer.FirstOrDefault(e => e.CustomerID == customerID);
+            return context.customer.FirstOrDefault(e => e.customerID == customerID);
         }
 
         public void DeleteCustomer(long customerID)
@@ -40,9 +41,9 @@ namespace UrediDom.Data
             }
         }
 
-        public Customer UpdateCustomer(Customer customer, Customer newCustomer)
+        public CustomerDto UpdateCustomer(CustomerDto customer, CustomerDto newCustomer)
         {
-            customer.Address = newCustomer.Address;
+            customer.address = newCustomer.address;
             context.SaveChanges();
             return customer;
         }

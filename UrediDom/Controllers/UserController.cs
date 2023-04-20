@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using UrediDom.Data;
@@ -9,32 +10,12 @@ namespace UrediDom.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository userRepository;
+        private readonly IConfiguration config;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IConfiguration config)
         {
             this.userRepository = userRepository;
-        }
-
-        /// <summary>
-        /// Add a new user
-        /// </summary>
-        /// <remarks>Add a new user</remarks>
-        /// <param name="body">Create a new user</param>
-        /// <response code="200">Successful operation</response>
-        /// <response code="405">Invalid input</response>
-        [HttpPost]
-        [Route("/user")]
-        public virtual IActionResult Adduser([FromBody] User body)
-        {
-            try
-            {
-                User user = userRepository.CreateUser(body);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+            this.config = config;
         }
 
         /// <summary>
@@ -44,6 +25,7 @@ namespace UrediDom.Controllers
         /// <param name="userId">user id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/user/{userId}")]
         public virtual IActionResult Deleteuser([FromRoute][Required] long userId, [FromHeader] string apiKey)
@@ -74,6 +56,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/user/{userId}")]
         public virtual IActionResult Getuser([FromRoute][Required] long userId)
@@ -95,11 +78,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize]
         [HttpPut]
         [Route("/user")]
-        public virtual IActionResult Updateuser([FromBody] User body)
+        public virtual IActionResult Updateuser([FromBody] UserDto body)
         {
-            var user = userRepository.GetUserById(body.UserID);
+            var user = userRepository.GetUserById(body.userID);
 
             if (user == null)
             {
@@ -117,9 +101,10 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/user")]
-        public virtual IActionResult User()
+        public new virtual IActionResult User()
         {
             var user = userRepository.GetUser();
 
@@ -129,6 +114,48 @@ namespace UrediDom.Controllers
             }
 
             return Ok(user);
+        }
+
+        /// CREATE ACCOUNT
+        /// REGISTRATION
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/register")]
+        public new virtual IActionResult Register([FromBody] UserDto body)
+        {
+            try
+            {
+                UserDto user = userRepository.CreateUser(body);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        /// LOGIN 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/login")]
+        public new virtual IActionResult Login([FromBody] LoginDto body)
+        {
+            try
+            {
+                UserDto? user = userRepository.LoginUser(body);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                var token = userRepository.GenerateToken(user, config);
+                return Ok(token);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
         }
     }
 }

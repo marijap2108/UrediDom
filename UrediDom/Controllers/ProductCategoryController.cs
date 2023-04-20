@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -22,13 +24,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new productCategory</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("/productCategory")]
-        public virtual IActionResult AddproductCategory([FromBody] ProductCategory body)
+        public virtual IActionResult AddproductCategory([FromBody] ProductCategoryDto body)
         {
             try
             {
-                ProductCategory category = productCategoryRepository.CreateProductCategory(body);
+                ProductCategoryDto category = productCategoryRepository.CreateProductCategory(body);
                 return Ok(category);
             }
             catch (Exception ex)
@@ -44,6 +47,7 @@ namespace UrediDom.Controllers
         /// <param name="productCategoryId">productCategory id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/productCategory/{productCategoryId}")]
         public virtual IActionResult DeleteproductCategory([FromRoute][Required] long productCategoryId, [FromHeader] string apiKey)
@@ -74,6 +78,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [AllowAnonymous]
         [HttpGet]
         [Route("/productCategory/{productCategoryId}")]
         public virtual IActionResult GetproductCategory([FromRoute][Required] long productCategoryId)
@@ -94,6 +99,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [AllowAnonymous]
         [HttpGet]
         [Route("/productCategory")]
         public virtual IActionResult ProductCategory()
@@ -116,11 +122,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("/productCategory")]
-        public virtual IActionResult UpdateproductCategory([FromBody] ProductCategory body)
+        public virtual IActionResult UpdateproductCategory([FromBody] ProductCategoryDto body)
         {
-            var category = productCategoryRepository.GetProductCategoryById(body.CategoryID);
+            var category = productCategoryRepository.GetProductCategoryById(body.categoryID);
 
             if (category == null)
             {

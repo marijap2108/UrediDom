@@ -1,15 +1,17 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IOrderRepository
     {
-        List<Order> GetOrder();
+        List<OrderDto> GetOrder();
 
-        Order CreateOrder(Order order);
+        OrderDto CreateOrder(OrderDto order);
 
-        Order? GetOrderById(long orderID);
+        OrderDto? GetOrderById(long orderID);
 
         void DeleteOrder(long orderID);
 
-        Order UpdateOrder(Order order, Order newOrder);
+        OrderDto UpdateOrder(OrderDto order, OrderDto newOrder);
     }
 }

@@ -1,15 +1,17 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IReservationRepository
     {
-        List<Reservation> GetReservation();
+        List<ReservationDto> GetReservation();
 
-        Reservation CreateReservation(Reservation reservation);
+        ReservationDto CreateReservation(ReservationDto reservation);
 
-        Reservation? GetReservationById(long reservationID);
+        ReservationDto? GetReservationById(long reservationID);
 
         void DeleteReservation(long reservationID);
 
-        Reservation UpdateReservation(Reservation reservation, Reservation newReservation);
+        ReservationDto UpdateReservation(ReservationDto reservation, ReservationDto newReservation);
     }
 }

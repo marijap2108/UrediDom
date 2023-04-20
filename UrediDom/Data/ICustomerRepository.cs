@@ -1,15 +1,17 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface ICustomerRepository
     {
-        List<Customer> GetCustomer();
+        List<CustomerDto> GetCustomer();
 
-        Customer CreateCustomer(Customer customer);
+        CustomerDto CreateCustomer(CustomerDto customer);
 
-        Customer? GetCustomerById(long customerID);
+        CustomerDto? GetCustomerById(long customerID);
 
         void DeleteCustomer(long customerID);
 
-        Customer UpdateCustomer(Customer customer, Customer newCustomer);
+        CustomerDto UpdateCustomer(CustomerDto customer, CustomerDto newCustomer);
     }
 }

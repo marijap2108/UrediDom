@@ -1,15 +1,17 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IProductGroupRepository
     {
-        List<ProductGroup> GetProductGroup();
+        List<ProductGroupDto> GetProductGroup();
 
-        ProductGroup CreateProductGroup(ProductGroup productGroup);
+        ProductGroupDto CreateProductGroup(ProductGroupDto productGroup);
 
-        ProductGroup? GetProductGroupById(long productGroupID);
+        ProductGroupDto? GetProductGroupById(long productGroupID);
 
         void DeleteProductGroup(long productGroupID);
 
-        ProductGroup UpdateProductGroup(ProductGroup group, ProductGroup newGroup);
+        ProductGroupDto UpdateProductGroup(ProductGroupDto group, ProductGroupDto newGroup);
     }
 }

@@ -1,4 +1,9 @@
-﻿using UrediDom.Entities;
+﻿using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using UrediDom.Entities;
+using UrediDom.Models;
 
 namespace UrediDom.Data
 {
@@ -11,22 +16,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<User> GetUser()
+        public List<UserDto> GetUser()
         {
-            Console.WriteLine(context.User.ToList());
-            return context.User.ToList();
+            Console.WriteLine(context.user.ToList());
+            return context.user.ToList();
         }
 
-        public User CreateUser(User user)
+        public UserDto CreateUser(UserDto user)
         {
             var createdEntity = context.Add(user);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public User? GetUserById(long userID)
+        public UserDto? GetUserById(long userID)
         {
-            return context.User.FirstOrDefault(e => e.UserID == userID);
+            return context.user.FirstOrDefault(e => e.userID == userID);
         }
 
         public void DeleteUser(long userID)
@@ -40,17 +45,44 @@ namespace UrediDom.Data
             }
         }
 
-        public User UpdateUser(User user, User newUser)
+        public UserDto UpdateUser(UserDto user, UserDto newUser)
         {
-            user.Name = newUser.Name;
-            user.Surname = newUser.Surname;
-            user.Username = newUser.Username;
-            user.Email = newUser.Email;
-            user.Password = newUser.Password;
-            user.Phone = newUser.Phone;
-            user.Birthday = newUser.Birthday;
+            user.name = newUser.name;
+            user.surname = newUser.surname;
+            user.username = newUser.username;
+            user.email = newUser.email;
+            user.password = newUser.password;
+            user.phone = newUser.phone;
+            user.birthday = newUser.birthday;
+            user.role = newUser.role;
             context.SaveChanges();
             return user;
         }
+
+        public UserDto? LoginUser(LoginDto login)
+        {
+            return context.user.FirstOrDefault(e => e.email == login.email && e.password == login.password);
+        }
+
+        public string GenerateToken(UserDto user, IConfiguration config)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier,user.email),
+                new Claim(ClaimTypes.Role,user.role)
+            };
+            var token = new JwtSecurityToken(config["Jwt:Issuer"],
+                config["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(15),
+                signingCredentials: credentials);
+
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+
+        }
+
     }
 }

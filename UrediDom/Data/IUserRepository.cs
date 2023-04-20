@@ -1,15 +1,21 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IUserRepository
     {
-        List<User> GetUser();
+        List<UserDto> GetUser();
 
-        User CreateUser(User user);
+        UserDto CreateUser(UserDto user);
 
-        User? GetUserById(long userID);
+        UserDto? GetUserById(long userID);
 
         void DeleteUser(long userID);
 
-        User UpdateUser(User user, User newUser);
+        UserDto UpdateUser(UserDto user, UserDto newUser);
+
+        UserDto? LoginUser(LoginDto user);
+
+        string GenerateToken(UserDto user, IConfiguration config);
     }
 }

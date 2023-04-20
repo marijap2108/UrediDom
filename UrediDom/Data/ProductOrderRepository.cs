@@ -12,27 +12,27 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<ProductOrder> GetProductOrder()
+        public List<ProductOrderDto> GetProductOrder()
         {
-            Console.WriteLine(context.ProductOrder.ToList());
-            return context.ProductOrder.ToList();
+            Console.WriteLine(context.productOrder.ToList());
+            return context.productOrder.ToList();
         }
 
-        public ProductOrder CreateProductOrder(ProductOrder productOrder)
+        public ProductOrderDto CreateProductOrder(ProductOrderDto productOrder)
         {
             var createdEntity = context.Add(productOrder);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public ProductOrder? GetByOrderId(long productOrderID)
+        public ProductOrderDto? GetByOrderId(long productOrderID)
         {
-            return context.ProductOrder.FirstOrDefault(e => e.OrderID == productOrderID);
+            return context.productOrder.FirstOrDefault(e => e.orderID == productOrderID);
         }
 
-        public ProductOrder? GetByProductId(long productOrderID)
+        public ProductOrderDto? GetByProductId(long productOrderID)
         {
-            return context.ProductOrder.FirstOrDefault(e => e.ProductID == productOrderID);
+            return context.productOrder.FirstOrDefault(e => e.productID == productOrderID);
         }
 
         public void DeleteByOrderId(long OrderID)
@@ -57,12 +57,12 @@ namespace UrediDom.Data
             }
         }
 
-        public ProductOrder UpdateProductOrder(ProductOrder order, ProductOrder newOrder)
+        public ProductOrderDto UpdateProductOrder(ProductOrderDto order, ProductOrderDto newOrder)
         {
-            order.ProductID = newOrder.ProductID;
-            order.OrderID = newOrder.OrderID;
-            order.Quantity = newOrder.Quantity;
-            order.Price = newOrder.Price;
+            order.productID = newOrder.productID;
+            order.orderID = newOrder.orderID;
+            order.quantity = newOrder.quantity;
+            order.price = newOrder.price;
             context.SaveChanges();
             return order;
         }

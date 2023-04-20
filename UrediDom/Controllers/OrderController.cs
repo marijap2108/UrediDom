@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using UrediDom.Data;
@@ -22,13 +23,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new order</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [AllowAnonymous]
         [HttpPost]
         [Route("/order")]
-        public virtual IActionResult Addorder([FromBody] Order body)
+        public virtual IActionResult Addorder([FromBody] OrderDto body)
         {
             try
             {
-                Order order = orderRepository.CreateOrder(body);
+                OrderDto order = orderRepository.CreateOrder(body);
                 return Ok(order);
             }
             catch (Exception ex)
@@ -44,6 +46,7 @@ namespace UrediDom.Controllers
         /// <param name="orderId">order id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/order/{orderId}")]
         public virtual IActionResult Deleteorder([FromRoute][Required] long orderId, [FromHeader] string apiKey)
@@ -74,6 +77,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/order/{orderId}")]
         public virtual IActionResult Getorder([FromRoute][Required] long orderId)
@@ -94,6 +98,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/order")]
         public virtual IActionResult Order()
@@ -116,11 +121,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("/order")]
-        public virtual IActionResult Updateorder([FromBody] Order body)
+        public virtual IActionResult Updateorder([FromBody] OrderDto body)
         {
-            var order = orderRepository.GetOrderById(body.OrderID);
+            var order = orderRepository.GetOrderById(body.orderID);
 
             if (order == null)
             {

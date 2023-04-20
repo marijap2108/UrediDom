@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -22,13 +24,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new productGroup</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("/productGroup")]
-        public virtual IActionResult AddproductGroup([FromBody] ProductGroup body)
+        public virtual IActionResult AddproductGroup([FromBody] ProductGroupDto body)
         {
             try
             {
-                ProductGroup productGroup = productGroupRepository.CreateProductGroup(body);
+                ProductGroupDto productGroup = productGroupRepository.CreateProductGroup(body);
                 return Ok(productGroup);
             }
             catch (Exception ex)
@@ -44,6 +47,7 @@ namespace UrediDom.Controllers
         /// <param name="productGroupId">productGroup id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/productGroup/{productGroupId}")]
         public virtual IActionResult DeleteproductGroup([FromRoute][Required] long productGroupId, [FromHeader] string apiKey)
@@ -74,6 +78,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [AllowAnonymous]
         [HttpGet]
         [Route("/productGroup/{productGroupId}")]
         public virtual IActionResult GetproductGroup([FromRoute][Required] long productGroupId)
@@ -94,6 +99,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [AllowAnonymous]
         [HttpGet]
         [Route("/productGroup")]
         public virtual IActionResult ProductGroup()
@@ -116,11 +122,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("/productGroup")]
-        public virtual IActionResult UpdateproductGroup([FromBody] ProductGroup body)
+        public virtual IActionResult UpdateproductGroup([FromBody] ProductGroupDto body)
         {
-            var productGroup = productGroupRepository.GetProductGroupById(body.GroupID);
+            var productGroup = productGroupRepository.GetProductGroupById(body.groupID);
 
             if (productGroup == null)
             {

@@ -1,15 +1,17 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IDiscountRepository
     {
-        List<Discount> GetDiscount();
+        List<DiscountDto> GetDiscount();
 
-        Discount CreateDiscount(Discount discount);
+        DiscountDto CreateDiscount(DiscountDto discount);
 
-        Discount? GetDiscountById(long discountID);
+        DiscountDto? GetDiscountById(long discountID);
 
         void DeleteDiscount(long discountID);
 
-        Discount UpdateDiscount(Discount discount, Discount newDiscount);
+        DiscountDto UpdateDiscount(DiscountDto discount, DiscountDto newDiscount);
     }
 }

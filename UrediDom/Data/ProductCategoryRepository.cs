@@ -12,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<ProductCategory> GetProductCategory()
+        public List<ProductCategoryDto> GetProductCategory()
         {
-            Console.WriteLine(context.ProductCategory.ToList());
-            return context.ProductCategory.ToList();
+            Console.WriteLine(context.productCategory.ToList());
+            return context.productCategory.ToList();
         }
 
-        public ProductCategory CreateProductCategory(ProductCategory productCategory)
+        public ProductCategoryDto CreateProductCategory(ProductCategoryDto productCategory)
         {
             var createdEntity = context.Add(productCategory);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public ProductCategory? GetProductCategoryById(long productCategoryID)
+        public ProductCategoryDto? GetProductCategoryById(long productCategoryID)
         {
-            return context.ProductCategory.FirstOrDefault(e => e.CategoryID == productCategoryID);
+            return context.productCategory.FirstOrDefault(e => e.categoryID == productCategoryID);
         }
 
         public void DeleteProductCategory(long productCategoryID)
@@ -41,10 +41,10 @@ namespace UrediDom.Data
             }
         }
 
-        public ProductCategory UpdateProductCategory(ProductCategory category, ProductCategory newCategory)
+        public ProductCategoryDto UpdateProductCategory(ProductCategoryDto category, ProductCategoryDto newCategory)
         {
-            category.Category = newCategory.Category;
-            category.ValueCat = newCategory.ValueCat;
+            category.category = newCategory.category;
+            category.valueCat = newCategory.valueCat;
             context.SaveChanges();
             return category;
         }

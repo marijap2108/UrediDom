@@ -12,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<Availability> GetAvailability()
+        public List<AvailabilityDto> GetAvailability()
         {
-            Console.WriteLine(context.Availability.ToList());
-            return context.Availability.ToList();
+            Console.WriteLine(context.availability.ToList());
+            return context.availability.ToList();
         }
 
-        public Availability CreateAvailability(Availability availability)
+        public AvailabilityDto CreateAvailability(AvailabilityDto availability)
         {
             var createdEntity = context.Add(availability);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public Availability? GetAvailabilityById(long repairmanID)
+        public AvailabilityDto? GetAvailabilityById(long repairmanID)
         {
-        return context.Availability.FirstOrDefault(e => e.RepairmanID == repairmanID);
+        return context.availability.FirstOrDefault(e => e.repairmanID == repairmanID);
         }
 
         public void DeleteAvailability(long repairmanID)
@@ -41,9 +41,9 @@ namespace UrediDom.Data
             }
         }
 
-        public Availability UpdateAvailability(Availability availability, Availability newAvailability)
+        public AvailabilityDto UpdateAvailability(AvailabilityDto availability, AvailabilityDto newAvailability)
         {
-            availability.Unavailable = newAvailability.Unavailable;
+            availability.unavailable = newAvailability.unavailable;
             context.SaveChanges();
             return availability;
         }

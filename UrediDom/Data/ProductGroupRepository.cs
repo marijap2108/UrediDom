@@ -1,4 +1,5 @@
 ﻿using UrediDom.Entities;
+using UrediDom.Models;
 
 namespace UrediDom.Data
 {
@@ -11,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<ProductGroup> GetProductGroup()
+        public List<ProductGroupDto> GetProductGroup()
         {
-            Console.WriteLine(context.ProductGroup.ToList());
-            return context.ProductGroup.ToList();
+            Console.WriteLine(context.productGroup.ToList());
+            return context.productGroup.ToList();
         }
 
-        public ProductGroup CreateProductGroup(ProductGroup productGroup)
+        public ProductGroupDto CreateProductGroup(ProductGroupDto productGroup)
         {
             var createdEntity = context.Add(productGroup);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public ProductGroup? GetProductGroupById(long productGroupID)
+        public ProductGroupDto? GetProductGroupById(long productGroupID)
         {
-            return context.ProductGroup.FirstOrDefault(e => e.GroupID == productGroupID);
+            return context.productGroup.FirstOrDefault(e => e.groupID == productGroupID);
         }
 
         public void DeleteProductGroup(long productGroupID)
@@ -40,9 +41,9 @@ namespace UrediDom.Data
             }
         }
 
-        public ProductGroup UpdateProductGroup(ProductGroup group, ProductGroup newGroup)
+        public ProductGroupDto UpdateProductGroup(ProductGroupDto group, ProductGroupDto newGroup)
         {
-            group.Description = newGroup.Description;
+            group.description = newGroup.description;
             context.SaveChanges();
             return group;
         }

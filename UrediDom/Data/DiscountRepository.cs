@@ -1,4 +1,5 @@
 ﻿using UrediDom.Entities;
+using UrediDom.Models;
 
 namespace UrediDom.Data
 {
@@ -11,22 +12,22 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<Discount> GetDiscount()
+        public List<DiscountDto> GetDiscount()
         {
-            Console.WriteLine(context.Discount.ToList());
-            return context.Discount.ToList();
+            Console.WriteLine(context.discount.ToList());
+            return context.discount.ToList();
         }
 
-        public Discount CreateDiscount(Discount discount)
+        public DiscountDto CreateDiscount(DiscountDto discount)
         {
             var createdEntity = context.Add(discount);
             context.SaveChanges();
             return createdEntity.Entity;
         }
 
-        public Discount? GetDiscountById(long discountID)
+        public DiscountDto? GetDiscountById(long discountID)
         {
-            return context.Discount.FirstOrDefault(e => e.DiscountID == discountID);
+            return context.discount.FirstOrDefault(e => e.discountID == discountID);
         }
 
         public void DeleteDiscount(long discountID)
@@ -40,15 +41,15 @@ namespace UrediDom.Data
             }
         }
 
-        public Discount UpdateDiscount(Discount discount, Discount newDiscount)
+        public DiscountDto UpdateDiscount(DiscountDto discount, DiscountDto newDiscount)
         {
-            discount.DiscountProcent = newDiscount.DiscountProcent;
-            discount.DiscountName = newDiscount.DiscountName;
-            discount.DiscountDescription = newDiscount.DiscountDescription;
-            discount.StartDay = newDiscount.StartDay;
-            discount.StartMonth = newDiscount.StartMonth;
-            discount.EndDay = newDiscount.EndDay;
-            discount.EndMonth = newDiscount.EndMonth;
+            discount.discountProcent = newDiscount.discountProcent;
+            discount.discountName = newDiscount.discountName;
+            discount.discountDescription = newDiscount.discountDescription;
+            discount.startDay = newDiscount.startDay;
+            discount.startMonth = newDiscount.startMonth;
+            discount.endDay = newDiscount.endDay;
+            discount.endMonth = newDiscount.endMonth;
             context.SaveChanges();
             return discount;
         }

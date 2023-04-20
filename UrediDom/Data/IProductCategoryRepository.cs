@@ -1,15 +1,17 @@
-﻿namespace UrediDom.Data
+﻿using UrediDom.Models;
+
+namespace UrediDom.Data
 {
     public interface IProductCategoryRepository
     {
-        List<ProductCategory> GetProductCategory();
+        List<ProductCategoryDto> GetProductCategory();
 
-        ProductCategory CreateProductCategory(ProductCategory productCategory);
+        ProductCategoryDto CreateProductCategory(ProductCategoryDto productCategory);
 
-        ProductCategory? GetProductCategoryById(long productCategoryID);
+        ProductCategoryDto? GetProductCategoryById(long productCategoryID);
 
         void DeleteProductCategory(long productCategoryID);
 
-        ProductCategory UpdateProductCategory(ProductCategory category, ProductCategory newCategory);
+        ProductCategoryDto UpdateProductCategory(ProductCategoryDto category, ProductCategoryDto newCategory);
     }
 }

@@ -6166,7 +6166,7 @@ namespace UrediDom
         public long DiscountID { get; set; }
     
         [Newtonsoft.Json.JsonProperty("discount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long DiscountProcent { get; set; }
+        public long Discount1 { get; set; }
     
         [Newtonsoft.Json.JsonProperty("discountName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DiscountName { get; set; }

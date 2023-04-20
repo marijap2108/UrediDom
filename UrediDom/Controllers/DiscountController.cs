@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -22,13 +24,14 @@ namespace UrediDom.Controllers
         /// <param name="body">Create a new discount</param>
         /// <response code="200">Successful operation</response>
         /// <response code="405">Invalid input</response>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [Route("/discount")]
-        public virtual IActionResult Adddiscount([FromBody] Discount body)
+        public virtual IActionResult Adddiscount([FromBody] DiscountDto body)
         {
             try
             {
-                Discount discount = discountRepository.CreateDiscount(body);
+                DiscountDto discount = discountRepository.CreateDiscount(body);
                 return Ok(discount);
             }
             catch (Exception ex)
@@ -44,6 +47,7 @@ namespace UrediDom.Controllers
         /// <param name="discountId">discount id to delete</param>
         /// <param name="apiKey"></param>
         /// <response code="400">Invalid value</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
         [Route("/discount/{discountId}")]
         public virtual IActionResult Deletediscount([FromRoute][Required] long discountId, [FromHeader] string apiKey)
@@ -73,6 +77,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/discount")]
         public virtual IActionResult Discount()
@@ -95,6 +100,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [Route("/discount/{discountId}")]
         public virtual IActionResult Getdiscount([FromRoute][Required] long discountId)
@@ -116,11 +122,12 @@ namespace UrediDom.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="400">Invalid ID</response>
         /// <response code="404">Not found</response>
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         [Route("/discount")]
-        public virtual IActionResult Updatediscount([FromBody] Discount body)
+        public virtual IActionResult Updatediscount([FromBody] DiscountDto body)
         {
-            var discount = discountRepository.GetDiscountById(body.DiscountID);
+            var discount = discountRepository.GetDiscountById(body.discountID);
 
             if (discount == null)
             {
