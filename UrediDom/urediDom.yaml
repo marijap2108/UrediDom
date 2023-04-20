@@ -1,0 +1,2229 @@
+openapi: 3.0.3
+info:
+  title: IT69/2019 Marija Petrovic
+  version: 1.0.11
+tags:
+  - name: typeOfProduct
+  - name: productCategory
+  - name: categoryProduct
+  - name: productGroup
+  - name: product
+  - name: user
+  - name: admin
+  - name: customer
+  - name: reapirman
+  - name: reservation
+  - name: availability
+  - name: order
+  - name: discount
+  - name: productOrder
+paths:
+  /typeOfProduct:
+    put:
+      tags:
+        - typeOfProduct
+      summary: Update an existing typeOfProduct
+      description: Update an existing typeOfProduct by Id
+      operationId: updateTypeOfProduct
+      requestBody:
+        description: Update an existent typeOfProduct
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/typeOfProduct'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/typeOfProduct'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/typeOfProduct'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/typeOfProduct'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/typeOfProduct'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - typeOfProduct
+      summary: Add a new typeOfProduct 
+      description: Add a new typeOfProduct 
+      operationId: addtypeOfProduct
+      requestBody:
+        description: Create a new typeOfProduct
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/typeOfProduct'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/typeOfProduct'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/typeOfProduct'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/typeOfProduct'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/typeOfProduct'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - typeOfProduct
+      summary: Find typeOfProduct
+      description: Returns a typeOfProduct
+      operationId: typeOfProduct
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/typeOfProduct'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/typeOfProduct'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /typeOfProduct/{typeOfProductId}:
+    get:
+      tags:
+        - typeOfProduct
+      summary: Find typeOfProduct by ID
+      description: Returns a typeOfProduct
+      operationId: gettypeOfProduct
+      parameters:
+        - name: typeOfProductId
+          in: path
+          description: ID of typeOfProduct to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/typeOfProduct'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/typeOfProduct'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - typeOfProduct
+      summary: Deletes a typeOfProduct
+      description: delete a typeOfProduct
+      operationId: deletetypeOfProduct
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: typeOfProductId
+          in: path
+          description: typeOfProduct id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /productCategory:
+    put:
+      tags:
+        - productCategory
+      summary: Update an existing productCategory
+      description: Update an existing productCategory by Id
+      operationId: updateproductCategory
+      requestBody:
+        description: Update an existent productCategory
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productCategory'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/productCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/productCategory'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productCategory'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productCategory'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - productCategory
+      summary: Add a new productCategory 
+      description: Add a new productCategory 
+      operationId: addproductCategory
+      requestBody:
+        description: Create a new productCategory
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productCategory'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/productCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/productCategory'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productCategory'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productCategory'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - productCategory
+      summary: Find productCategory
+      description: Returns a productCategory
+      operationId: productCategory
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productCategory'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productCategory'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /productCategory/{productCategoryId}:
+    get:
+      tags:
+        - productCategory
+      summary: Find productCategory by ID
+      description: Returns a productCategory
+      operationId: getproductCategory
+      parameters:
+        - name: productCategoryId
+          in: path
+          description: ID of productCategory to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productCategory'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productCategory'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - productCategory
+      summary: Deletes a productCategory
+      description: delete a productCategory
+      operationId: deleteproductCategory
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: productCategoryId
+          in: path
+          description: productCategory id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /categoryProduct:
+    put:
+      tags:
+        - categoryProduct
+      summary: Update an existing categoryProduct
+      description: Update an existing categoryProduct by Id
+      operationId: updatecategoryProduct
+      requestBody:
+        description: Update an existent categoryProduct
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/categoryProduct'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/categoryProduct'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/categoryProduct'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/categoryProduct'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/categoryProduct'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - categoryProduct
+      summary: Add a new categoryProduct 
+      description: Add a new categoryProduct 
+      operationId: addcategoryProduct
+      requestBody:
+        description: Create a new categoryProduct
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/categoryProduct'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/categoryProduct'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/categoryProduct'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/categoryProduct'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/categoryProduct'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - categoryProduct
+      summary: Find categoryProduct
+      description: Returns a categoryProduct
+      operationId: categoryProduct
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/categoryProduct'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/categoryProduct'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /categoryProduct/{categoryProductId}:
+    get:
+      tags:
+        - categoryProduct
+      summary: Find categoryProduct by ID
+      description: Returns a categoryProduct
+      operationId: getcategoryProduct
+      parameters:
+        - name: categoryProductId
+          in: path
+          description: ID of categoryProduct to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/categoryProduct'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/categoryProduct'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - categoryProduct
+      summary: Deletes a categoryProduct
+      description: delete a categoryProduct
+      operationId: deletecategoryProduct
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: categoryProductId
+          in: path
+          description: categoryProduct id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /productGroup:
+    put:
+      tags:
+        - productGroup
+      summary: Update an existing productGroup
+      description: Update an existing productGroup by Id
+      operationId: updateproductGroup
+      requestBody:
+        description: Update an existent productGroup
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productGroup'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/productGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/productGroup'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productGroup'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productGroup'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - productGroup
+      summary: Add a new productGroup 
+      description: Add a new productGroup 
+      operationId: addproductGroup
+      requestBody:
+        description: Create a new productGroup
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productGroup'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/productGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/productGroup'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productGroup'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productGroup'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - productGroup
+      summary: Find productGroup
+      description: Returns a productGroup
+      operationId: productGroup
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productGroup'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productGroup'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /productGroup/{productGroupId}:
+    get:
+      tags:
+        - productGroup
+      summary: Find productGroup by ID
+      description: Returns a productGroup
+      operationId: getproductGroup
+      parameters:
+        - name: productGroupId
+          in: path
+          description: ID of productGroup to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productGroup'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productGroup'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - productGroup
+      summary: Deletes a productGroup
+      description: delete a productGroup
+      operationId: deleteproductGroup
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: productGroupId
+          in: path
+          description: productGroup id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /product:
+    put:
+      tags:
+        - product
+      summary: Update an existing product
+      description: Update an existing product by Id
+      operationId: updateproduct
+      requestBody:
+        description: Update an existent product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/product'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/product'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - product
+      summary: Add a new product 
+      description: Add a new product 
+      operationId: addproduct
+      requestBody:
+        description: Create a new product
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/product'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/product'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/product'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - product
+      summary: Find product
+      description: Returns a product
+      operationId: product
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/product'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /product/{productId}:
+    get:
+      tags:
+        - product
+      summary: Find product by ID
+      description: Returns a product
+      operationId: getproduct
+      parameters:
+        - name: productId
+          in: path
+          description: ID of product to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/product'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/product'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - product
+      summary: Deletes a product
+      description: delete a product
+      operationId: deleteproduct
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: product id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /user:
+    put:
+      tags:
+        - user
+      summary: Update an existing user
+      description: Update an existing user by Id
+      operationId: updateuser
+      requestBody:
+        description: Update an existent user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/user'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/user'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - user
+      summary: Add a new user 
+      description: Add a new user 
+      operationId: adduser
+      requestBody:
+        description: Create a new user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/user'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/user'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/user'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - user
+      summary: Find user
+      description: Returns a user
+      operationId: user
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/user'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /user/{userId}:
+    get:
+      tags:
+        - user
+      summary: Find user by ID
+      description: Returns a user
+      operationId: getuser
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/user'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - user
+      summary: Deletes a user
+      description: delete a user
+      operationId: deleteuser
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: user id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /admin:
+    put:
+      tags:
+        - admin
+      summary: Update an existing admin
+      description: Update an existing admin by Id
+      operationId: updateadmin
+      requestBody:
+        description: Update an existent admin
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/admin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/admin'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/admin'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - admin
+      summary: Add a new admin 
+      description: Add a new admin 
+      operationId: addadmin
+      requestBody:
+        description: Create a new admin
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/admin'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/admin'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/admin'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/admin'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - admin
+      summary: Find admin
+      description: Returns a admin
+      operationId: admin
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/admin'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /admin/{adminId}:
+    get:
+      tags:
+        - admin
+      summary: Find admin by ID
+      description: Returns a admin
+      operationId: getadmin
+      parameters:
+        - name: adminId
+          in: path
+          description: ID of admin to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admin'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/admin'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - admin
+      summary: Deletes a admin
+      description: delete a admin
+      operationId: deleteadmin
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: adminId
+          in: path
+          description: admin id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /customer:
+    put:
+      tags:
+        - customer
+      summary: Update an existing customer
+      description: Update an existing customer by Id
+      operationId: updatecustomer
+      requestBody:
+        description: Update an existent customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/customer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/customer'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/customer'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - customer
+      summary: Add a new customer 
+      description: Add a new customer 
+      operationId: addcustomer
+      requestBody:
+        description: Create a new customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/customer'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/customer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/customer'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/customer'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - customer
+      summary: Find customer
+      description: Returns a customer
+      operationId: customer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/customer'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /customer/{customerId}:
+    get:
+      tags:
+        - customer
+      summary: Find customer by ID
+      description: Returns a customer
+      operationId: getcustomer
+      parameters:
+        - name: customerId
+          in: path
+          description: ID of customer to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/customer'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - customer
+      summary: Deletes a customer
+      description: delete a customer
+      operationId: deletecustomer
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: customerId
+          in: path
+          description: customer id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /reapirman:
+    put:
+      tags:
+        - reapirman
+      summary: Update an existing reapirman
+      description: Update an existing reapirman by Id
+      operationId: updatereapirman
+      requestBody:
+        description: Update an existent reapirman
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reapirman'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/reapirman'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/reapirman'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/land'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/land'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - reapirman
+      summary: Add a new reapirman 
+      description: Add a new reapirman 
+      operationId: addreapirman
+      requestBody:
+        description: Create a new reapirman
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reapirman'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/reapirman'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/reapirman'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reapirman'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/reapirman'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - reapirman
+      summary: Find reapirman
+      description: Returns a reapirman
+      operationId: reapirman
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reapirman'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/reapirman'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /reapirman/{reapirmanId}:
+    get:
+      tags:
+        - reapirman
+      summary: Find reapirman by ID
+      description: Returns a reapirman
+      operationId: getreapirman
+      parameters:
+        - name: reapirmanId
+          in: path
+          description: ID of reapirman to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reapirman'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/reapirman'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - reapirman
+      summary: Deletes a reapirman
+      description: delete a reapirman
+      operationId: deletereapirman
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: reapirmanId
+          in: path
+          description: reapirman id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /reservation:
+    put:
+      tags:
+        - reservation
+      summary: Update an existing reservation
+      description: Update an existing reservation by Id
+      operationId: updatereservation
+      requestBody:
+        description: Update an existent reservation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reservation'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/reservation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/reservation'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reservation'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/reservation'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - reservation
+      summary: Add a new reservation 
+      description: Add a new reservation 
+      operationId: addreservation
+      requestBody:
+        description: Create a new reservation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/reservation'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/reservation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/reservation'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reservation'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/reservation'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - reservation
+      summary: Find reservation
+      description: Returns a reservation
+      operationId: reservation
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reservation'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/reservation'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /reservation/{reservationId}:
+    get:
+      tags:
+        - reservation
+      summary: Find reservation by ID
+      description: Returns a reservation
+      operationId: getreservation
+      parameters:
+        - name: reservationId
+          in: path
+          description: ID of reservation to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reservation'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/reservation'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - reservation
+      summary: Deletes a reservation
+      description: delete a reservation
+      operationId: deletereservation
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: reservationId
+          in: path
+          description: reservation id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /availability:
+    put:
+      tags:
+        - availability
+      summary: Update an existing availability
+      description: Update an existing availability by Id
+      operationId: updateavailability
+      requestBody:
+        description: Update an existent availability
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/availability'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/availability'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/availability'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/availability'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/availability'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - availability
+      summary: Add a new availability 
+      description: Add a new availability 
+      operationId: addavailability
+      requestBody:
+        description: Create a new availability
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/availability'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/availability'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/availability'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/availability'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/availability'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - availability
+      summary: Find availability
+      description: Returns a availability
+      operationId: availability
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/availability'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/availability'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /availability/{availabilityId}:
+    get:
+      tags:
+        - availability
+      summary: Find availability by ID
+      description: Returns a availability
+      operationId: getavailability
+      parameters:
+        - name: availabilityId
+          in: path
+          description: ID of availability to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/availability'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/availability'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - availability
+      summary: Deletes a availability
+      description: delete a availability
+      operationId: deleteavailability
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: availabilityId
+          in: path
+          description: availability id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /order:
+    put:
+      tags:
+        - order
+      summary: Update an existing order
+      description: Update an existing order by Id
+      operationId: updateorder
+      requestBody:
+        description: Update an existent order
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/order'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/order'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - order
+      summary: Add a new order 
+      description: Add a new order 
+      operationId: addorder
+      requestBody:
+        description: Create a new order
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/order'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/order'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - order
+      summary: Find order
+      description: Returns a order
+      operationId: order
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/order'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /order/{orderId}:
+    get:
+      tags:
+        - order
+      summary: Find order by ID
+      description: Returns a order
+      operationId: getorder
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of order to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/order'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - order
+      summary: Deletes a order
+      description: delete a order
+      operationId: deleteorder
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: orderId
+          in: path
+          description: order id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /discount:
+    put:
+      tags:
+        - discount
+      summary: Update an existing discount
+      description: Update an existing discount by Id
+      operationId: updatediscount
+      requestBody:
+        description: Update an existent discount
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/discount'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/discount'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/discount'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/discount'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/discount'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - discount
+      summary: Add a new discount 
+      description: Add a new discount 
+      operationId: adddiscount
+      requestBody:
+        description: Create a new discount
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/discount'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/discount'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/discount'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/discount'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/discount'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - discount
+      summary: Find discount
+      description: Returns a discount
+      operationId: discount
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/discount'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/discount'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /discount/{discountId}:
+    get:
+      tags:
+        - discount
+      summary: Find discount by ID
+      description: Returns a discount
+      operationId: getdiscount
+      parameters:
+        - name: discountId
+          in: path
+          description: ID of discount to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/discount'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/discount'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - discount
+      summary: Deletes a discount
+      description: delete a discount
+      operationId: deletediscount
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: discountId
+          in: path
+          description: discount id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+  /productOrder:
+    put:
+      tags:
+        - productOrder
+      summary: Update an existing productOrder
+      description: Update an existing productOrder by Id
+      operationId: updatedproductOrder
+      requestBody:
+        description: Update an existent productOrder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productOrder'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/productOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/productOrder'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productOrder'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productOrder'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Not found
+    post:
+      tags:
+        - productOrder
+      summary: Add a new productOrder 
+      description: Add a new productOrder 
+      operationId: addproductOrder
+      requestBody:
+        description: Create a new productOrder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productOrder'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/productOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/productOrder'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productOrder'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productOrder'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - productOrder
+      summary: Find productOrder
+      description: Returns a productOrder
+      operationId: productOrder
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productOrder'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productOrder'
+        '400':
+          description: Invalid 
+        '404':
+          description: Not found
+  /productOrder/{productOrderId}:
+    get:
+      tags:
+        - productOrder
+      summary: Find productOrder by ID
+      description: Returns a productOrder
+      operationId: getproductOrder
+      parameters:
+        - name: productOrderId
+          in: path
+          description: ID of productOrder to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productOrder'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/productOrder'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not found
+    delete:
+      tags:
+        - productOrder
+      summary: Deletes a productOrder
+      description: delete a productOrder
+      operationId: deleteproductOrder
+      parameters:
+        - name: api_key
+          in: header
+          description: ''
+          required: false
+          schema:
+            type: string
+        - name: productOrderId
+          in: path
+          description: productOrder id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid value
+ 
+components:
+  schemas:
+    land:
+      type: object
+      properties:
+        labelLand:
+          type: integer
+          format: int64
+          example: 10
+        surface:
+          type: string
+          example: 500m2
+        soilCulture:
+          type: string
+          example: field
+        class:
+          type: string
+          example: first
+        workability:
+          type: string
+          example: arable
+        formOfProperty:
+          type: string
+          example: personal
+        drainage:
+          type: string
+          example: possible
+      xml:
+        name: land
+    typeOfProduct:
+      type: object
+      properties:
+        typeID:
+          type: integer
+          format: int64
+          example: 1
+        typeName:
+          type: string
+          example: Plocice
+      xml:
+        name: typeOfProduct
+    productCategory:
+      type: object
+      properties:
+        categoryID:
+          type: integer
+          format: int64
+          example: 1
+        category:
+          type: string
+          example: Boja
+        valueCat:
+          type: string
+          example: Siva
+      xml:
+        name: productCategory
+    categoryProduct:
+      type: object
+      properties:
+        categoryID:
+          type: integer
+          format: int64
+          example: 2
+        productID:
+          type: integer
+          format: int64
+          example: 1
+      xml:
+        name: categoryProduct
+    productGroup:
+      type: object
+      properties:
+        groupID:
+          type: integer
+          format: int64
+          example: 1
+        description:
+          type: string
+          example: Ovi proizvodi pripadaju seriji jesen 2022.
+      xml:
+        name: productGroup
+    product:
+      type: object
+      properties:
+        productID:
+          type: integer
+          format: int64
+          example: 1
+        productName:
+          type: string
+          example: ASTON Azul
+        price:
+          type: number
+          format: float
+          example: 1500
+        description:
+          type: string
+          example: ASTON AZUL 8300 1 33,3X33,3 PODNE PLOCICE
+        quantity: 
+          type: integer
+          format: int64
+          example: 20
+        typeID:
+          type: integer
+          format: int64
+          example: 1
+        groupID:
+          type: integer
+          format: int64
+          example: 1
+      xml:
+        name: product
+    user:
+      type: object
+      properties:
+        userID:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Petar
+        surname:
+          type: string
+          example: Petrovic
+        username:
+          type: string
+          example: perica123
+        email:
+          type: string
+          example: petarp@gmail.com
+        password:
+          type: string
+          example: petar123
+        phone:
+          type: string
+          example: 0698234235
+        birthday:
+          type: string
+          format: date
+          example: 1995-05-22
+      xml:
+        name: user
+    admin:
+      type: object
+      properties:
+        adminID:
+          type: integer
+          format: int64
+          example: 1
+      xml:
+        name: admin
+    reapirman:
+      type: object
+      properties:
+        repairmanID:
+          type: integer
+          format: int64
+          example: 1
+      xml:
+        name: reapirman
+    customer:
+      type: object
+      properties:
+        customerID:
+          type: integer
+          format: int64
+          example: 4
+        address:
+          type: string
+          example: Strazilovska 27, ZR
+      xml:
+        name: customer
+    availability:
+      type: object
+      properties:
+        repairmanID:
+          type: integer
+          format: int64
+          example: 3
+        unavailable:
+          type: string
+          format: date
+          example: 2023-01-12
+      xml:
+        name: availability
+    reservation:
+      type: object
+      properties:
+        reservationID:
+          type: integer
+          format: int64
+          example: 1
+        startDate:
+          type: string
+          format: date
+          example: 2022-12-12
+        endDate:
+          type: string
+          format: date
+          example: 2022-12-19
+        repairmanID:
+          type: integer
+          format: int64
+          example: 3
+      xml:
+        name: reservation
+    order:
+      type: object
+      properties:
+        orderID:
+          type: integer
+          format: int64
+          example: 1
+        dateOfOrder:
+          type: string
+          format: date
+          example: 2022-12-05
+        amount:
+          type: integer
+          format: float
+          example: 7500
+        customerID:
+          type: integer
+          format: int64
+          example: 2
+        repairmanID:
+          type: integer
+          format: int64
+          example: 3
+    discount:
+      type: object
+      properties:
+        discountID:
+          type: integer
+          format: int64
+          example: 1
+        discount:
+          type: integer
+          format: int64
+          example: 10
+        discountName:
+          type: string
+          example: Novogodisnji popust
+        discountDescription:
+          type: string
+          example: Popust koji korisnici ostvaruju u vreme novogodisnjih praznika
+        startDay:
+          type: integer
+          format: int64
+          example: 15
+        startMonth:
+          type: integer
+          format: int64
+          example: 12
+        endDay:
+          type: integer
+          format: int64
+          example: 15
+        endMonth:
+          type: integer
+          format: int64
+          example: 01
+      xml:
+        name: discount   
+    productOrder:
+      type: object
+      properties:
+        productID:
+          type: integer
+          format: int64
+          example: 1
+        orderID:
+          type: integer
+          format: int64
+          example: 11
+        quantity:
+          type: integer
+          format: int64
+          example: 5
+        price:
+          type: integer
+          format: int64
+          example: 1500
+      xml:
+        name: productOrder 
+      
+    
+    
+    

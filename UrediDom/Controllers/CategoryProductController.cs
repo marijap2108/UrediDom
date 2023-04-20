@@ -117,7 +117,7 @@ namespace UrediDom.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpDelete]
-        [Route("/categoryProduct/{productId}/{categoryId}")]
+        [Route("/categoryProduct/{categoryId}/{productId}")]
         public virtual IActionResult DeletecategoryProduct([FromRoute][Required] long productId, [FromRoute][Required] long categoryId, [FromHeader] string apiKey)
         {
             try
@@ -176,7 +176,7 @@ namespace UrediDom.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("/categoryProduct/{productId}/{categoryId}")]
+        [Route("/categoryProduct/{categoryId}/{productId}")]
         public virtual IActionResult GetcategoryProduct([FromRoute][Required] long productId, [FromRoute][Required] long categoryId)
         {
             var categoryProduct = categoryProductRepository.GetCategoryProductByIds(productId, categoryId);
