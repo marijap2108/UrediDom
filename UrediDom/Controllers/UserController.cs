@@ -123,10 +123,13 @@ namespace UrediDom.Controllers
         [Route("/register")]
         public new virtual IActionResult Register([FromBody] UserDto body)
         {
+            body.role = "customer";
             try
             {
                 UserDto user = userRepository.CreateUser(body);
-                return Ok(user);
+
+                var token = userRepository.GenerateToken(user, config);
+                return Ok(new { token });
             }
             catch (Exception ex)
             {
@@ -150,7 +153,7 @@ namespace UrediDom.Controllers
                 }
 
                 var token = userRepository.GenerateToken(user, config);
-                return Ok(token);
+                return Ok(new { token });
             }
             catch (Exception ex)
             {
