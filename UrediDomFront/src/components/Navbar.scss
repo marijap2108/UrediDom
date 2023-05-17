@@ -1,3 +1,26 @@
 .navbar {
   background-color: whitesmoke;
+  display: flex;
+  width: 100vw;
+  position: sticky;
+  top: 0;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__right {
+    a {
+      margin: 8px;
+    }
+  }
 }
