@@ -19,8 +19,14 @@ const Navbar = () => {
       <Link to="/">
         <img src="/logo.png" alt="logo" width="80px" height="80px"/>
       </Link>
+      <Link to="/home">
+        Home
+      </Link>
       <Link to="/productList">
         Products
+      </Link>
+      <Link to="/aboutUs">
+        About us
       </Link>
     </div>
     <div className="navbar__right">
@@ -41,7 +47,7 @@ const Navbar = () => {
         <Link to="/signIn">
           Sign in
         </Link>
-        <Link to="signUp">
+        <Link to="/signUp">
           Sign up
         </Link>
       </>

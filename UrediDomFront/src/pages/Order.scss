@@ -1,0 +1,10 @@
+.cart {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px lightgray;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  margin: 100px 150px 100px;
+  padding: 24px;
+}

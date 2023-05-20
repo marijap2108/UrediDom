@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react"
 import { useCookies } from "react-cookie"
 import { useNavigate } from "react-router-dom"
+import "./SignUp.scss"
+import Button from "../components/Button"
 
 const SignUp = () => {
   const [form, setForm] = useState({name: '', surname: '', username: '', email: '', password: '', phone: '', birthday: '', role: ''})
@@ -26,6 +28,7 @@ const SignUp = () => {
   }, [form, navigate, setCookie])
 
   return <div className="signUp">
+    <h2>Sign up</h2>
     <label>
       Name:
       <input type="text" name="name" value={form.name} id='name' onChange={handleInput} />
@@ -54,9 +57,9 @@ const SignUp = () => {
       Birthday:
       <input type="date" name="birthday" value={form.birthday} id='birthday' onChange={handleInput} />
     </label>
-    <button onClick={handleSubmit}>
+    <Button onClick={handleSubmit}>
       Submit
-    </button>
+    </Button>
   </div>
 }
 

@@ -1,0 +1,14 @@
+.signUp {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px rgba(0, 0, 0, .1);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  height: 500px;
+  width: 500px;
+  margin: 50px auto 0;
+  padding: 12px;
+}

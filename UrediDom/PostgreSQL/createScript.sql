@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS "productCategory";
 
 CREATE TABLE public."productCategory" 
 (
-    "categoryID" integer NOT NULL,
+    "categoryID" serial NOT NULL,
     "category" varchar(15) NOT NULL,
     "valueCat" varchar(20) NOT NULL,
 	PRIMARY KEY ("categoryID")
@@ -25,20 +25,20 @@ CREATE TABLE public."productCategory"
 
 CREATE TABLE public."typeOfProduct"
 (
-	"typeID" integer NOT NULL,
+	"typeID" serial NOT NULL,
 	"typeName" varchar(15) NOT NULL,
 	PRIMARY KEY ("typeID")
 );
 
 CREATE TABLE public."productGroup"
 (
-	"groupID" integer NOT NULL,
+	"groupID" serial NOT NULL,
 	PRIMARY KEY ("groupID")
 );
 
 CREATE TABLE public."product"
 (
-	"productID" integer NOT NULL,
+	"productID" serial NOT NULL,
 	"productName" varchar(50) NOT NULL,
 	"price" float4 NOT NULL,
 	"description" text,
@@ -54,7 +54,7 @@ CREATE TABLE public."product"
 
 CREATE TABLE public."categoryProduct"
 (
-	"categoryID" integer NOT NULL,
+	"categoryID" serial NOT NULL,
 	"productID" integer NOT NULL,
 	CONSTRAINT "FK_categoryID" FOREIGN KEY ("categoryID")
 		REFERENCES public."productCategory" ("categoryID"),
@@ -64,7 +64,7 @@ CREATE TABLE public."categoryProduct"
 
 CREATE TABLE public."user"
 (
-	"userID" integer NOT NULL,
+	"userID" serial NOT NULL,
 	"name" varchar(15) NOT NULL,
 	"surname" varchar(20) NOT NULL,
 	"username" varchar(35) NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE public."availability"
 
 CREATE TABLE public."reservation"
 (
-	"reservationID" integer NOT NULL,
+	"reservationID" serial NOT NULL,
 	"startDate" date NOT NULL,
 	"endDate" date NOT NULL,
 	"repairmanID" integer NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE public."reservation"
 
 CREATE TABLE public."order"
 (
-	"orderID" integer NOT NULL,
+	"orderID" serial NOT NULL,
 	"dateOfOrder" date NOT NULL,
 	"amount" float4 NOT NULL,
 	"customerID" integer,
@@ -135,7 +135,7 @@ CREATE TABLE public."order"
 
 CREATE TABLE public."discount"
 (
-	"discountID" integer NOT NULL,
+	"discountID" serial NOT NULL,
 	"discountProcent" integer NOT NULL,
 	"discountName" varchar(50) NOT NULL,
 	"discountDescription" text,
@@ -148,7 +148,7 @@ CREATE TABLE public."discount"
 
 CREATE TABLE public."productOrder"
 (
-	"productID" integer NOT NULL,
+	"productID" serial NOT NULL,
 	"orderID" integer NOT NULL,
 	"quantity" integer NOT NULL,
 	"price" float4 NOT NULL,
