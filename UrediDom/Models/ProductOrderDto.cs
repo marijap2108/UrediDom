@@ -1,8 +1,10 @@
 ﻿using System.Runtime.Serialization;
 using System.Xml.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace UrediDom.Models
 {
+    [Keyless]
     public class ProductOrderDto
     {
         /// <summary>

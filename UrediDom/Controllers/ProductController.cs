@@ -103,9 +103,9 @@ namespace UrediDom.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("/product")]
-        public virtual IActionResult Product()
+        public virtual IActionResult Product([FromQuery] QueryParams queryParams)
         {
-            var products = productRepository.GetProduct();
+            var products = productRepository.GetProduct(queryParams);
 
             if (products == null || products.Count == 0)
             {
@@ -137,6 +137,20 @@ namespace UrediDom.Controllers
 
             productRepository.UpdateProduct(product, body);
             return Ok(product);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("/products/{typeId}")]
+        public virtual IActionResult Getproductbytype([FromRoute][Required] long typeID, [FromQuery] QueryParams queryParams)
+        {
+            var products = productRepository.GetProductByType(typeID, queryParams);
+
+            if (products == null)
+            {
+                return NotFound();
+            }
+            return Ok(products);
         }
     }
 }

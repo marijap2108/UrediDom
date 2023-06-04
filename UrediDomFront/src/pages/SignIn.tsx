@@ -28,15 +28,15 @@ const SignIn = () => {
   }, [form, navigate, setCookie])
 
   return <div className="signInWrapper">
-    <h2>Sign in</h2>
+    <h2>Prijavi se</h2>
     <div className="signIn">
-      <div className="signUp__left">
-        <div className="signUp__left__text">
-          <p>Thank you for visiting our web site!</p>
-          <p>If you do not have an account and you want to have one, click on the SIGN UP bellow to create new account.</p>
+      <div className="signIn__left">
+        <div className="signIn__left__text">
+          <p>Hvala Vam što ste posetili našu veb stranicu!</p>
+          <p>Ako nemate nalog i želite ga kreirati, kliknite na KREIRAJ NALOG ispod kako biste napravili novi nalog.</p>
         </div>
         <Link to="/signUp">
-            Sign up
+            KREIRAJ NALOG
         </Link>
       </div>
       <div className="signIn__right">
@@ -45,11 +45,11 @@ const SignIn = () => {
           <input type="email" name="email" value={form.email} id='email' onChange={handleInput} />
         </label>
         <label>
-          Password
+          Šifra:
           <input type="password" name="password" value={form.password} id='password' onChange={handleInput} />
         </label>
         <Button onClick={handleSubmit}>
-          Submit
+          Prijavi se
         </Button>
       </div>
     </div>

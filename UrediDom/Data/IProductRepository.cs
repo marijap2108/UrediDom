@@ -4,7 +4,7 @@ namespace UrediDom.Data
 {
     public interface IProductRepository
     {
-        List<ProductDto> GetProduct();
+        List<ProductDto> GetProduct(QueryParams queryParams);
 
         ProductDto CreateProduct(ProductDto product);
 
@@ -13,5 +13,7 @@ namespace UrediDom.Data
         void DeleteProduct(long productID);
 
         ProductDto UpdateProduct(ProductDto product, ProductDto newProduct);
+
+        List<ProductDto>? GetProductByType(long typeID, QueryParams queryParams);
     }
 }

@@ -45,6 +45,7 @@ CREATE TABLE public."product"
 	"quantity" integer NOT NULL,
 	"typeID" integer NOT NULL,
 	"groupID" integer,
+	"imgSrc" text,
 	PRIMARY KEY ("productID"),
 	CONSTRAINT "FK_typeID" FOREIGN KEY ("typeID")
 		REFERENCES public."typeOfProduct" ("typeID"),
@@ -125,7 +126,7 @@ CREATE TABLE public."order"
 	"dateOfOrder" date NOT NULL,
 	"amount" float4 NOT NULL,
 	"customerID" integer,
-	"repairmanID" integer NOT NULL,
+	"repairmanID" integer,
 	PRIMARY KEY ("orderID"),
 	CONSTRAINT "FK_customerOrder" FOREIGN KEY ("customerID")
 		REFERENCES public."customer" ("customerID"),

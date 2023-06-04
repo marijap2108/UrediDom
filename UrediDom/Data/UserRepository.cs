@@ -34,6 +34,11 @@ namespace UrediDom.Data
             return context.user.FirstOrDefault(e => e.userID == userID);
         }
 
+        public UserDto? GetUserByEmail(string email)
+        {
+            return context.user.FirstOrDefault(e => e.email == email);
+        }
+
         public void DeleteUser(long userID)
         {
             var user = GetUserById(userID);
@@ -76,7 +81,7 @@ namespace UrediDom.Data
             var token = new JwtSecurityToken(config["Jwt:Issuer"],
                 config["Jwt:Audience"],
                 claims,
-                expires: DateTime.Now.AddMinutes(15),
+                expires: DateTime.Now.AddDays(15),
                 signingCredentials: credentials);
 
 

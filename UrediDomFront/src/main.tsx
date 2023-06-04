@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import {
@@ -22,6 +21,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "productList/",
+        element: <ProductList />,
+      },
+      {
+        path: "productList/:typeId",
         element: <ProductList />,
       },
       {
@@ -57,7 +60,5 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
 )

@@ -55,5 +55,12 @@ namespace UrediDom.Models
 
         [DataMember(Name = "groupID")]
         public long? groupID { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ImgSrc
+        /// </summary>
+
+        [DataMember(Name = "imgSrc")]
+        public string imgSrc { get; set; }
     }
 }

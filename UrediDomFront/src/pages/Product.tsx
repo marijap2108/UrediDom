@@ -7,7 +7,7 @@ import { AddToCart } from "../utils/Cart"
 
 const Product = () => {
   const { productID } = useParams()
-  const [product, setProduct] = useState({productID: 0, productName: '', price: 0, description: '', quantity: 0})
+  const [product, setProduct] = useState({productID: 0, productName: '', price: 0, description: '', quantity: 0, imgSrc: ''})
 
   const handleCart = useCallback((e: MouseEvent<HTMLElement>) => {
     AddToCart(product.productID, 1)
@@ -27,7 +27,7 @@ const Product = () => {
 
   return <div className="product">
     <div className="product__left">
-      SLIKA
+      <img src={product.imgSrc} />
     </div>
     <div className="product__right">
       <h2>{product.productName}</h2>

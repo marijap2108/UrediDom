@@ -10,6 +10,8 @@ namespace UrediDom.Data
 
         UserDto? GetUserById(long userID);
 
+        UserDto? GetUserByEmail(string email);
+
         void DeleteUser(long userID);
 
         UserDto UpdateUser(UserDto user, UserDto newUser);

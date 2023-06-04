@@ -20,6 +20,7 @@ namespace UrediDom.Data
 
         public OrderDto CreateOrder(OrderDto order)
         {
+            order.dateOfOrder = DateTime.Now;
             var createdEntity = context.Add(order);
             context.SaveChanges();
             return createdEntity.Entity;

@@ -1,7 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -12,10 +18,12 @@ namespace UrediDom.Controllers
         private readonly IUserRepository userRepository;
         private readonly IConfiguration config;
 
+
         public UserController(IUserRepository userRepository, IConfiguration config)
         {
             this.userRepository = userRepository;
             this.config = config;
+
         }
 
         /// <summary>
@@ -103,8 +111,8 @@ namespace UrediDom.Controllers
         /// <response code="404">Not found</response>
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("/user")]
-        public new virtual IActionResult User()
+        [Route("/users")]
+        public new virtual IActionResult Users()
         {
             var user = userRepository.GetUser();
 
@@ -113,6 +121,30 @@ namespace UrediDom.Controllers
                 return NotFound();
             }
 
+            return Ok(user);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("/user")]
+        public new virtual IActionResult User([FromHeader] string autherization)
+        {
+            StringValues values;
+            Request.Headers.TryGetValue("Authorization", out values);
+
+            var jwt = values.ToString();
+            jwt = jwt.Replace("Bearer", "").Trim();
+
+            var handler = new JwtSecurityTokenHandler();
+
+            JwtSecurityToken token = handler.ReadJwtToken(jwt);
+
+            var user = userRepository.GetUserByEmail(token.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
             return Ok(user);
         }
 

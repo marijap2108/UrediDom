@@ -1,4 +1,5 @@
-﻿using UrediDom.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using UrediDom.Entities;
 using UrediDom.Models;
 
 namespace UrediDom.Data
@@ -12,10 +13,14 @@ namespace UrediDom.Data
             this.context = context;
         }
 
-        public List<ProductDto> GetProduct()
+        public List<ProductDto> GetProduct(QueryParams queryParams)
         {
-            Console.WriteLine(context.product.ToList());
-            return context.product.ToList();
+            if (queryParams.SortDirection == "asc")
+            {
+                return context.product.OrderBy(e => EF.Property<ProductDto>(e, queryParams.Sort ?? "productID")).Skip(queryParams.Step ?? 0).Take(9).ToList();
+            }
+
+            return context.product.OrderByDescending(e => EF.Property<ProductDto>(e, queryParams.Sort ?? "productID")).Skip(queryParams.Step ?? 0).Take(9).ToList();
         }
 
         public ProductDto CreateProduct(ProductDto product)
@@ -51,6 +56,16 @@ namespace UrediDom.Data
             product.groupID = newProduct.groupID;
             context.SaveChanges();
             return product;
+        }
+
+        public List<ProductDto>? GetProductByType(long typeID, QueryParams queryParams)
+        {
+            if (queryParams.SortDirection == "asc")
+            {
+                return context.product.Where(e => e.typeID == typeID).OrderBy(e => EF.Property<ProductDto>(e, queryParams.Sort ?? "productID")).Skip(queryParams.Step ?? 0).Take(9).ToList();
+            }
+
+            return context.product.Where(e => e.typeID == typeID).OrderByDescending(e => EF.Property<ProductDto>(e, queryParams.Sort ?? "productID")).Skip(queryParams.Step ?? 0).Take(9).ToList();
         }
     }
 }

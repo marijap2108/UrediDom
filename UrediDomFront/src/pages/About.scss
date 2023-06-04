@@ -5,4 +5,15 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
   padding: 24px;
   margin: 75px 150px 75px;
+  
+  img {
+    width: 100%;
+    aspect-ratio: 12/4;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  }
+
+  section {
+    margin-bottom: 24px;
+  }
 }

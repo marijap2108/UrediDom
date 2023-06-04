@@ -7,25 +7,25 @@ interface IProductCard {
   productID: number,
   productName: string,
   price: number,
-  description: string
+  description: string,
+  imgSrc: string
 }
 
-const ProductCard = ({productID, productName, price, description} : IProductCard) => {
+const ProductCard = ({productID, productName, price, imgSrc} : IProductCard) => {
   const navigate = useNavigate()
 
   const openProduct = useCallback(() => {
       navigate(`/product/${productID}`)
   }, [navigate, productID])
 
-  return <div className="productCard" onClick={openProduct}>
+  return <div onClick={openProduct} className="productCard">
     <div className="productCard__top">
-
+      <img src={imgSrc} />
     </div>
     <div className="productCard__bottom">
       <p>{productName}</p>
-      <p>{description}</p>
       <p>{price}</p>
-      <Button>Add to cart</Button>
+      <Button>See more</Button>
     </div>
   </div>
 }

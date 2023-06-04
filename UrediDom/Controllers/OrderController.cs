@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
+using Stripe;
+using Stripe.FinancialConnections;
 using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -10,14 +15,18 @@ namespace UrediDom.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository orderRepository;
+        private readonly IUserRepository userRepository;
+        private readonly IProductOrderRepository productOrderRepository;
 
-        public OrderController(IOrderRepository orderRepository)
+        public OrderController(IOrderRepository orderRepository, IUserRepository userRepository, IProductOrderRepository productOrderRepository)
         {
             this.orderRepository = orderRepository;
+            this.userRepository = userRepository;
+            this.productOrderRepository = productOrderRepository;
         }
 
         /// <summary>
-        /// Add a new order
+        /// Add a new order and stripe
         /// </summary>
         /// <remarks>Add a new order</remarks>
         /// <param name="body">Create a new order</param>
@@ -26,12 +35,63 @@ namespace UrediDom.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("/order")]
-        public virtual IActionResult Addorder([FromBody] OrderDto body)
+        public virtual async Task<IActionResult> Addorder([FromBody] List<ProductOrderDto> body)
         {
+            OrderDto order = new OrderDto();
+
+            StringValues values;
+            Request.Headers.TryGetValue("Authorization", out values);
+
+            var jwt = values.ToString();
+
+            if (jwt.Contains("Bearer"))
+            {
+                jwt = jwt.Replace("Bearer", "").Trim();
+
+                var handler = new JwtSecurityTokenHandler();
+
+                JwtSecurityToken token = new JwtSecurityToken();
+
+                try
+                {
+                    token = handler.ReadJwtToken(jwt);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+
+
+                var user = userRepository.GetUserByEmail(token!.Claims.First(c => c.Type == ClaimTypes.NameIdentifier)?.Value);
+                order.customerID = user?.userID;
+            }
+
+
+            order.amount = (int?)body.Sum(product => product.quantity * product.price);
+
             try
             {
-                OrderDto order = orderRepository.CreateOrder(body);
-                return Ok(order);
+                order = orderRepository.CreateOrder(order);
+
+                body.ForEach(productOrder =>
+                {
+                    productOrder.orderID = order.orderID;
+                    productOrderRepository.CreateProductOrder(productOrder);
+                });
+
+                StripeConfiguration.ApiKey = "sk_test_51NEXvEERmXeMfmnkriY1UFLsNlHDrhlm3QWmkgVWeHGKawOjFRfJOx3wTHqigjLqUi0mAbvGycMlMyNLdMFNraBi00m9HrwXen";
+
+                var options = new PaymentIntentCreateOptions
+                {
+                    Amount = order.amount,
+                    Currency = "rsd",
+                    PaymentMethodTypes = new List<string> { "card" },
+                    Metadata = new Dictionary<string, string> { { "orderID", order.orderID.ToString() } }
+                };
+                var service = new PaymentIntentService();
+                var intent = await service.CreateAsync(options);
+
+                return Ok(new { clientSecret = intent.ClientSecret });
             }
             catch (Exception ex)
             {

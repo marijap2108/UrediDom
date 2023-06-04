@@ -16,39 +16,39 @@ const Navbar = () => {
 
   return <div className="navbar">
     <div className="navbar__left">
-      <Link to="/">
+      <Link to="/home">
         <img src="/logo.png" alt="logo" width="80px" height="80px"/>
       </Link>
       <Link to="/home">
-        Home
+        Početna
       </Link>
       <Link to="/productList">
-        Products
+        Proizvodi
       </Link>
       <Link to="/aboutUs">
-        About us
+        O nama
       </Link>
     </div>
     <div className="navbar__right">
       <Link to="/order">
-        <FaShoppingCart /> Cart
+        <FaShoppingCart /> Korpa
       </Link>
       {cookies.token ?
       <>
         <Link to="/profile">
-          Profile
+          Profil
         </Link>
         <Button onClick={handleLogOut}>
-          Log out
+          Odjavi se
         </Button>
       </>
       :
       <>
         <Link to="/signIn">
-          Sign in
+          Prijavi se
         </Link>
         <Link to="/signUp">
-          Sign up
+          Kreiraj nalog
         </Link>
       </>
       }

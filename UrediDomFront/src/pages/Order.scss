@@ -7,4 +7,18 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
   margin: 100px 150px 100px;
   padding: 24px;
+
+  &__left__product {
+    position: relative;
+
+    &__trash {
+      position: absolute;
+      top: 93%;
+      right: 10px;
+    }
+  }
+
+  Button {
+    margin: 30px 0px 0px;
+  }
 }
