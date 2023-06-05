@@ -1,12 +1,20 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace UrediDom.Models
 {
-    [Keyless]
     public class ProductOrderDto
     {
+        /// <summary>
+        /// Gets or Sets productOrderID
+        /// </summary>
+
+        [Key]
+        [DataMember(Name = "productOrderID")]
+        public long productOrderID { get; set; }
+
         /// <summary>
         /// Gets or Sets ProductID
         /// </summary>

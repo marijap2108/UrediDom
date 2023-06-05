@@ -1,0 +1,28 @@
+.reserve {
+  background-color: whitesmoke;
+  border: solid 1px rgba(0, 0, 0, .1);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  width: 700px;
+  margin: 40px auto 20px;
+  padding: 12px;
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 12/4;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    margin-top: 24px;
+  }
+
+  input {
+    margin-left: 12px;
+  }
+}

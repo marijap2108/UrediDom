@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using UrediDom.Data;
 using UrediDom.Models;
 
@@ -155,13 +156,22 @@ namespace UrediDom.Controllers
         [Route("/register")]
         public new virtual IActionResult Register([FromBody] UserDto body)
         {
+            var emailMatch = Regex.Match(body.email, @"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$");
+            var passwordMatch = Regex.Match(body.password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$");
+
+            if (!emailMatch.Success || !passwordMatch.Success || body.name.Length < 2 || body.surname.Length < 2 || body.phone.Length != 10 || body.username.Length < 2 || DateTime.Compare((DateTime)body.birthday, DateTime.Now) > 0)
+            {
+                return BadRequest();
+            }
+
             body.role = "customer";
+
             try
             {
                 UserDto user = userRepository.CreateUser(body);
 
                 var token = userRepository.GenerateToken(user, config);
-                return Ok(new { token });
+                return Ok(new { token, role = user.role });
             }
             catch (Exception ex)
             {
@@ -185,7 +195,7 @@ namespace UrediDom.Controllers
                 }
 
                 var token = userRepository.GenerateToken(user, config);
-                return Ok(new { token });
+                return Ok(new { token, role = user.role });
             }
             catch (Exception ex)
             {

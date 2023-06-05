@@ -1,0 +1,15 @@
+.reservationComplete {
+  background-color: whitesmoke;
+  border-bottom: solid 1px lightgray;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 50px 150px 50px;
+  text-align: center;
+  
+  img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 24px;
+  }
+}

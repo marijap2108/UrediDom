@@ -34,7 +34,7 @@ const Product = () => {
       <p>{product.description}</p>
       <p>{product.price}</p>
       <p>{product.quantity}</p>
-      <Button onClick={handleCart}><FaShoppingCart /> Add to cart</Button>
+      <Button onClick={handleCart}><FaShoppingCart /> Dodaj u korpu</Button>
     </div>
   </div>
 }

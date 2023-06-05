@@ -10,6 +10,8 @@ namespace UrediDom.Data
 
         OrderDto? GetOrderById(long orderID);
 
+        OrderDto? GetOrderByIntent(string intent);
+
         void DeleteOrder(long orderID);
 
         OrderDto UpdateOrder(OrderDto order, OrderDto newOrder);

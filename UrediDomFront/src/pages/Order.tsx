@@ -88,7 +88,9 @@ const Order = () => {
         </>
       case 1:
         return <Elements stripe={stripePromise} options={options}>
-          <Payment />
+          <div className="payment">
+            <Payment />
+          </div>
         </Elements>
     }
   }, [handleCart, options, products, step])
@@ -99,17 +101,17 @@ const Order = () => {
     </div>
     <div className="cart__right">
       <div>
-        <h2>RECEIPT</h2>
+        <h2>RAČUN</h2>
         {products.map((product, i) =>
           <div key={`order_${i}`}>
-            <span>{product.productName} </span>
-            <span>{product.price} </span>
-            <span>{product.quantity} </span>
-            <span>{product.price * product.quantity}</span>
+            <span>{product.productName}, </span>
+            <span>{product.price}, </span>
+            <span>{product.quantity} kom, </span>
+            <span> Ukupno = {product.price * product.quantity}</span>
           </div>
         )}
         <div>
-          <h3>TOTAL</h3>
+          <h3>UKUPNO</h3>
           <div>
             {products.reduce((a, product) =>
               a + product.quantity * product.price, 0
@@ -117,7 +119,7 @@ const Order = () => {
           </div>
         </div>
       </div>
-      <Button onClick={handleStep}>Pay</Button>
+      <Button onClick={handleStep}>Plati</Button>
     </div>
   </div>
 }

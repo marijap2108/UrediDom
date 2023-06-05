@@ -13,7 +13,8 @@ const SignIn = () => {
     setForm(old => ({...old, [target.id]: target.value}))
   }, [])
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback((e: any) => {
+    e.preventDefault()
     fetch('https://localhost:7269/login', {
       method: 'POST',
       mode: 'cors',
@@ -23,7 +24,8 @@ const SignIn = () => {
       body: JSON.stringify(form)
     }).then(res => res.json().then(data => {
       setCookie("token", data.token)
-      navigate("/")
+      localStorage.setItem("role", data.role)
+      navigate("/home")
     }))
   }, [form, navigate, setCookie])
 
@@ -39,19 +41,19 @@ const SignIn = () => {
             KREIRAJ NALOG
         </Link>
       </div>
-      <div className="signIn__right">
+      <form onSubmit={handleSubmit} className="signIn__right">
         <label>
           Email:
-          <input type="email" name="email" value={form.email} id='email' onChange={handleInput} />
+          <input type="email" name="email" value={form.email} id='email' onChange={handleInput} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
         </label>
         <label>
           Šifra:
-          <input type="password" name="password" value={form.password} id='password' onChange={handleInput} />
+          <input type="password" name="password" value={form.password} id='password' onChange={handleInput} pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" />
         </label>
-        <Button onClick={handleSubmit}>
+        <Button>
           Prijavi se
         </Button>
-      </div>
+      </form>
     </div>
   </div>
 }

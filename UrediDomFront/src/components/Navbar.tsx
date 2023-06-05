@@ -11,7 +11,8 @@ const Navbar = () => {
 
   const handleLogOut = useCallback(() => {
     removeCookie("token")
-    navigate("/")
+    navigate("/home")
+    localStorage.removeItem("role");
   }, [navigate, removeCookie])
 
   return <div className="navbar">
@@ -28,6 +29,7 @@ const Navbar = () => {
       <Link to="/aboutUs">
         O nama
       </Link>
+      {localStorage.getItem("role") === "admin" && <Link to="/admin">Admin</Link>}
     </div>
     <div className="navbar__right">
       <Link to="/order">

@@ -1,24 +1,50 @@
 .cart {
-  background-color: whitesmoke;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  border-bottom: solid 1px lightgray;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-  margin: 100px 150px 100px;
-  padding: 24px;
+  margin: 100px 40px;
+  position: relative;
+  align-items: flex-start;
 
-  &__left__product {
-    position: relative;
+  &__left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-right: 24px;
+    justify-content: space-evenly;
+    width: 100%;
 
-    &__trash {
-      position: absolute;
-      top: 93%;
-      right: 10px;
+    &__product {
+      position: relative;
+
+      &__trash {
+        position: absolute;
+        top: 90%;
+        right: 10px;
+      }
     }
+  }
+
+  &__right {
+    background-color: whitesmoke;
+    border-bottom: solid 1px lightgray;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    border-radius: 12px;
+    padding: 24px;
+    position: sticky;
+    top: 197px;
+    flex-shrink: 0;
   }
 
   Button {
     margin: 30px 0px 0px;
   }
+}
+
+.payment {
+  background-color: whitesmoke;
+  border-bottom: solid 1px lightgray;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+  border-radius: 12px;
+  padding: 24px;
+  width: 500px;
 }

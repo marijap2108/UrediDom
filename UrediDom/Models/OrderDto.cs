@@ -26,7 +26,7 @@ namespace UrediDom.Models
         /// </summary>
 
         [DataMember(Name = "amount")]
-        public int? amount { get; set; }
+        public Single? amount { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomerID
@@ -41,5 +41,12 @@ namespace UrediDom.Models
 
         [DataMember(Name = "repairmanID")]
         public long? repairmanID { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Intent
+        /// </summary>
+
+        [DataMember(Name = "intent")]
+        public string? intent { get; set; }
     }
 }

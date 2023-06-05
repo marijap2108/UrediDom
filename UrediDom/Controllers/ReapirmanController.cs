@@ -99,19 +99,19 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet]
         [Route("/reapirman")]
         public virtual IActionResult Reapirman()
         {
-            var reapirmans = reapirmanRepository.GetRepairman();
+            var repairmans = reapirmanRepository.GetRepairman();
 
-            if (reapirmans == null || reapirmans.Count == 0)
+            if (repairmans == null || repairmans.Count == 0)
             {
                 return NotFound();
             }
 
-            return Ok(reapirmans);
+            return Ok(repairmans);
         }
     }
 }

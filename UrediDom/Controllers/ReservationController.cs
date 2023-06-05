@@ -28,6 +28,11 @@ namespace UrediDom.Controllers
         [Route("/reservation")]
         public virtual IActionResult Addreservation([FromBody] ReservationDto body)
         {
+            if (DateTime.Compare((DateTime)body.startDate, (DateTime)body.endDate) > 0)
+            {
+                return BadRequest();
+            }
+
             try
             {
                 ReservationDto reservation = reservationRepository.CreateReservation(body);

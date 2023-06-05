@@ -31,6 +31,11 @@ namespace UrediDom.Data
             return context.order.FirstOrDefault(e => e.orderID == orderID);
         }
 
+        public OrderDto? GetOrderByIntent(string intent)
+        {
+            return context.order.FirstOrDefault(e => e.intent == intent);
+        }
+
         public void DeleteOrder(long orderID)
         {
             var order = GetOrderById(orderID);

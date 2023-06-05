@@ -25,7 +25,7 @@ const ProductCard = ({productID, productName, price, imgSrc} : IProductCard) => 
     <div className="productCard__bottom">
       <p>{productName}</p>
       <p>{price}</p>
-      <Button>See more</Button>
+      <Button>Vidi detalje</Button>
     </div>
   </div>
 }

@@ -19,6 +19,6 @@ namespace UrediDom.Models
         /// </summary>
 
         [DataMember(Name = "sector")]
-        public long sector { get; set; }
+        public string? sector { get; set; }
     }
 }

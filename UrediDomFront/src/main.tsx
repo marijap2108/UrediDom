@@ -13,6 +13,10 @@ import About from './pages/About.tsx';
 import ProductList from './pages/ProductList.tsx';
 import Product from './pages/Product.tsx';
 import Order from './pages/Order.tsx';
+import OrderComplete from './pages/OrderComplete.tsx';
+import Reserve from './pages/Reserve.tsx';
+import Admin from './pages/Admin.tsx';
+import ReservationComplete from './pages/ReservationComplete.tsx';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +58,22 @@ const router = createBrowserRouter([
       {
         path: "/order",
         element: <Order />
+      },
+      {
+        path: "/order/complete",
+        element: <OrderComplete />
+      },
+      {
+        path: "/reserve",
+        element: <Reserve />
+      },
+      {
+        path: "/admin",
+        element: <Admin />
+      },
+      {
+        path: "/reservationComplete",
+        element: <ReservationComplete />
       }
     ],
   },

@@ -14,6 +14,8 @@ namespace UrediDom.Controllers
 {
     public class OrderController : ControllerBase
     {
+        const string endpointSecret = "whsec_3d6877d33a2c45b01e7640fd2c7014047efd1da6d302771a09c8ab9dc0f1d9f1";
+
         private readonly IOrderRepository orderRepository;
         private readonly IUserRepository userRepository;
         private readonly IProductOrderRepository productOrderRepository;
@@ -71,6 +73,20 @@ namespace UrediDom.Controllers
 
             try
             {
+
+                StripeConfiguration.ApiKey = "sk_test_51NEXvEERmXeMfmnkriY1UFLsNlHDrhlm3QWmkgVWeHGKawOjFRfJOx3wTHqigjLqUi0mAbvGycMlMyNLdMFNraBi00m9HrwXen";
+
+                var options = new PaymentIntentCreateOptions
+                {
+                    Amount = (int) order.amount * 100,
+                    Currency = "rsd",
+                    PaymentMethodTypes = new List<string> { "card" },
+                };
+                var service = new PaymentIntentService();
+                var intent = await service.CreateAsync(options);
+
+                order.intent = intent.Id;
+
                 order = orderRepository.CreateOrder(order);
 
                 body.ForEach(productOrder =>
@@ -78,18 +94,6 @@ namespace UrediDom.Controllers
                     productOrder.orderID = order.orderID;
                     productOrderRepository.CreateProductOrder(productOrder);
                 });
-
-                StripeConfiguration.ApiKey = "sk_test_51NEXvEERmXeMfmnkriY1UFLsNlHDrhlm3QWmkgVWeHGKawOjFRfJOx3wTHqigjLqUi0mAbvGycMlMyNLdMFNraBi00m9HrwXen";
-
-                var options = new PaymentIntentCreateOptions
-                {
-                    Amount = order.amount,
-                    Currency = "rsd",
-                    PaymentMethodTypes = new List<string> { "card" },
-                    Metadata = new Dictionary<string, string> { { "orderID", order.orderID.ToString() } }
-                };
-                var service = new PaymentIntentService();
-                var intent = await service.CreateAsync(options);
 
                 return Ok(new { clientSecret = intent.ClientSecret });
             }
@@ -151,6 +155,20 @@ namespace UrediDom.Controllers
             return Ok(order);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("/order/intent/{intent}")]
+        public virtual IActionResult Getorderbytintent([FromRoute][Required] string intent)
+        {
+            var order = orderRepository.GetOrderByIntent(intent);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return Ok(order);
+        }
+
         /// <summary>
         /// Find order
         /// </summary>
@@ -158,7 +176,7 @@ namespace UrediDom.Controllers
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid</response>
         /// <response code="404">Not found</response>
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         [HttpGet]
         [Route("/order")]
         public virtual IActionResult Order()
@@ -195,6 +213,35 @@ namespace UrediDom.Controllers
 
             orderRepository.UpdateOrder(order, body);
             return Ok(order);
+        }
+
+        [HttpPost]
+        [Route("/order/webhook")]
+        public virtual async Task<IActionResult> Index()
+        {
+            var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+            try
+            {
+                var stripeEvent = EventUtility.ConstructEvent(json,
+                    Request.Headers["Stripe-Signature"], endpointSecret);
+
+                // Handle the event
+                if (stripeEvent.Type == Events.PaymentIntentSucceeded)
+                {
+                    Console.WriteLine(stripeEvent);
+                }
+                // ... handle other event types
+                else
+                {
+                    Console.WriteLine("Unhandled event type: {0}", stripeEvent.Type);
+                }
+
+                return Ok();
+            }
+            catch (StripeException e)
+            {
+                return BadRequest();
+            }
         }
     }
 }

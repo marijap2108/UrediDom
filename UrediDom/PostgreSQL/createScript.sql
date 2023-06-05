@@ -127,9 +127,10 @@ CREATE TABLE public."order"
 	"amount" float4 NOT NULL,
 	"customerID" integer,
 	"repairmanID" integer,
+	"intent" text,
 	PRIMARY KEY ("orderID"),
 	CONSTRAINT "FK_customerOrder" FOREIGN KEY ("customerID")
-		REFERENCES public."customer" ("customerID"),
+		REFERENCES public."user" ("userID"),
 	CONSTRAINT "FK_repairmanOrder" FOREIGN KEY ("repairmanID")
 		REFERENCES public."repairman" ("repairmanID")
 );
@@ -149,11 +150,13 @@ CREATE TABLE public."discount"
 
 CREATE TABLE public."productOrder"
 (
+	"productOrderID" serial NOT NULL,
 	"productID" serial NOT NULL,
 	"orderID" integer NOT NULL,
 	"quantity" integer NOT NULL,
 	"price" float4 NOT NULL,
 	"discountID" integer,
+	PRIMARY KEY ("productOrderID"),
 	CONSTRAINT "FK_productID" FOREIGN KEY ("productID")
 		REFERENCES public."product" ("productID"),
 	CONSTRAINT "FK_orderID" FOREIGN KEY ("orderID")
@@ -197,3 +200,5 @@ CREATE OR REPLACE TRIGGER updateQuantity AFTER INSERT
 	ON public."productOrder"
 	FOR EACH ROW
 	EXECUTE PROCEDURE checkQuantity();
+
+	

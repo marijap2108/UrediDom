@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react"
 import ProductCard from "../components/ProductCard"
 import "./ProductList.scss"
 import { Link, useParams, useSearchParams } from "react-router-dom"
@@ -29,7 +29,7 @@ const ProductList = () => {
   const [types, setTypes] = useState<IType[]>([])
   const [categories, setCategories] = useState<ICategory[]>([])
   const { typeId } = useParams()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [step, setStep] = useState(1)
   const [endOfList, setEndOfList] = useState(false)
 
@@ -65,9 +65,18 @@ const ProductList = () => {
     }))
   }, [searchParams, typeId])
 
-  const handleSort = useCallback((e: any) => {
-    console.log(e)
-  }, [])
+  const handleSort = useCallback(({target: { id }}: ChangeEvent<HTMLInputElement>) => {
+    const [newSort, newSortDirection] = id.split("_")
+    const params = searchParams.toString() ? JSON.parse('{"' + decodeURI(searchParams.toString()).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}') : {}
+    if (newSort === 'all') {
+      delete params.sort
+      delete params.sortDirection
+    } else {
+      params.sort = newSort
+      params.sortDirection = newSortDirection
+    }
+    setSearchParams(params)
+  }, [searchParams, setSearchParams])
 
   const loadMore = useCallback(() => {
     fetch(`https://localhost:7269/product${typeId ? `s/${typeId}` : ''}?sortDirection=${searchParams.get('sortDirection') ?? 'asc'}&sort=${searchParams.get('sort') ?? 'productID'}&step=${step * 9}`, {
@@ -91,31 +100,31 @@ const ProductList = () => {
       <ul>
         <li>
           <label>
-            <input id="all" onChange={handleSort} type="radio" name="sort" />
+            <input id="all" checked={!searchParams.get('sort') && !searchParams.get('sortDirection')} onChange={handleSort} type="radio" name="sort" />
             Prikaži sve
           </label>
         </li>
         <li>
           <label>
-            <input id="price_asc" onChange={handleSort} type="radio" name="sort" />
+            <input id="price_asc" checked={searchParams.get('sort') + '_' + searchParams.get('sortDirection') === 'price_asc'} onChange={handleSort} type="radio" name="sort" />
             Po ceni rastuće
           </label>
         </li>
         <li>
           <label>
-            <input id="price_desc" onChange={handleSort} type="radio" name="sort" />
+            <input id="price_desc" checked={searchParams.get('sort') + '_' + searchParams.get('sortDirection') === 'price_desc'} onChange={handleSort} type="radio" name="sort" />
             Po ceni opadajuće
           </label>
         </li>
         <li>
           <label>
-            <input id="name_asc" onChange={handleSort} type="radio" name="sort" />
+            <input id="productName_asc" checked={searchParams.get('sort') + '_' + searchParams.get('sortDirection') === 'productName_asc'} onChange={handleSort} type="radio" name="sort" />
             Po proizvodima rastuće
           </label>
         </li>
         <li>
           <label>
-            <input id="name_desc" type="radio" name="sort" />
+            <input id="productName_desc" checked={searchParams.get('sort') + '_' + searchParams.get('sortDirection') === 'productName_desc'} onChange={handleSort} type="radio" name="sort" />
             Po proizvodima opadajuće
           </label>
         </li>
