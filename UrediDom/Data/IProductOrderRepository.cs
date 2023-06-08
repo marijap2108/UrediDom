@@ -8,7 +8,7 @@ namespace UrediDom.Data
 
         ProductOrderDto CreateProductOrder(ProductOrderDto productOrder);
 
-        ProductOrderDto? GetByOrderId(long productOrderID);
+        List<ProductOrderDto> GetByOrderId(long productOrderID);
 
         ProductOrderDto? GetByProductId(long productOrderID);
 

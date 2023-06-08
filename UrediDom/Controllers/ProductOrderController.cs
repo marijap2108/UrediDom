@@ -44,16 +44,16 @@ namespace UrediDom.Controllers
         /// Find productOrder by ID
         /// </summary>
         /// <remarks>Returns a productOrder</remarks>
-        /// <param name="productOrderId">ID of productOrder to return</param>
+        /// <param name="orderId">ID of productOrder to return</param>
         /// <response code="200">successful operation</response>
         /// <response code="400">Invalid ID supplied</response>
         /// <response code="404">Not found</response>
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("/productOrder/{productId}")]
-        public virtual IActionResult GetByProductID([FromRoute][Required] long productId)
+        [Route("/productOrder/{orderId}")]
+        public virtual IActionResult GetByOrderId([FromRoute][Required] long orderId)
         {
-            var productOrder = productOrderRepository.GetByProductId(productId);
+            var productOrder = productOrderRepository.GetByOrderId(orderId);
 
             if (productOrder == null)
             {

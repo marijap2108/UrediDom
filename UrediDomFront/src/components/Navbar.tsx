@@ -29,7 +29,7 @@ const Navbar = () => {
       <Link to="/aboutUs">
         O nama
       </Link>
-      {localStorage.getItem("role") === "admin" && <Link to="/admin">Admin</Link>}
+      {localStorage.getItem("role") === "Admin" && <><Link to="/admin">Admin</Link> <Link to="/newProduct">Dodaj proizvod</Link></>}
     </div>
     <div className="navbar__right">
       <Link to="/order">

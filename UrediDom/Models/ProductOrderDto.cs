@@ -41,6 +41,6 @@ namespace UrediDom.Models
         /// </summary>
 
         [DataMember(Name = "price")]
-        public long? price { get; set; }
+        public Single? price { get; set; }
     }
 }

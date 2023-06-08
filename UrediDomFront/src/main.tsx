@@ -17,6 +17,7 @@ import OrderComplete from './pages/OrderComplete.tsx';
 import Reserve from './pages/Reserve.tsx';
 import Admin from './pages/Admin.tsx';
 import ReservationComplete from './pages/ReservationComplete.tsx';
+import NewProduct from './pages/NewProduct.tsx';
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/reservationComplete",
         element: <ReservationComplete />
+      },
+      {
+        path: "/newProduct",
+        element: <NewProduct />
       }
     ],
   },

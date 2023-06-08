@@ -25,9 +25,9 @@ namespace UrediDom.Data
             return createdEntity.Entity;
         }
 
-        public ProductOrderDto? GetByOrderId(long productOrderID)
+        public List<ProductOrderDto> GetByOrderId(long productOrderID)
         {
-            return context.productOrder.FirstOrDefault(e => e.orderID == productOrderID);
+            return context.productOrder.Where(e => e.orderID == productOrderID).ToList();
         }
 
         public ProductOrderDto? GetByProductId(long productOrderID)
